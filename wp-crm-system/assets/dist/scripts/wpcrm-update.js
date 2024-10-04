@@ -1,0 +1,1 @@
+jQuery(document).ready((function(t){t("#wpcrm-updater").submit((function(){return t("#wpcrm-update-submit").attr("disabled",!0),data={action:"wpcrm_update_contacts",wpcrm_nonce:wpcrm_vars.wpcrm_nonce},t.post(ajaxurl,data,(function(a){alert(a),t("#wpcrm-update-submit").attr("disabled",!1),t("#wpcrm_update_nag").hide(),t("#wpcrm_update_status").show()})),!1}))}));

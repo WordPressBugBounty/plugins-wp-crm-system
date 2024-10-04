@@ -1,0 +1,669 @@
+/* Calendar */
+/* shared */
+/* Upsell page */
+td.calendar-day {
+  min-height: 80px;
+  vertical-align: top; }
+  td.calendar-day ul {
+    margin-top: auto; }
+
+* html div.calendar-day {
+  height: 80px; }
+
+* html div.calendar-day-np {
+  height: 80px; }
+
+td.calendar-day-np {
+  min-height: 80px;
+  vertical-align: top; }
+
+.wp-crm-welcome-content {
+  width: 100%; }
+
+#address_book_results {
+  margin-top: 10px; }
+
+#project_list_results {
+  margin-top: 10px; }
+
+#task_list_results {
+  margin-top: 10px; }
+
+#opportunity_list_results {
+  margin-top: 10px; }
+
+.wpcrm-circle {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px; }
+
+#system-info-textarea {
+  background: none;
+  font-family: Menlo,Monaco,monospace;
+  display: block;
+  overflow: auto;
+  white-space: pre;
+  width: 800px;
+  height: 400px; }
+
+.dashicons.wpcrm-dashicons:before {
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  font-size: 13px;
+  vertical-align: top;
+  margin-top: 3px; }
+
+.wpcrm-dashicons-fax {
+  background-image: url("../includes/images/fax.png");
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 13px;
+  margin-top: 3px;
+  display: inline-block;
+  padding-right: 3px; }
+
+.wp-crm-dashboard-boxes {
+  float: left;
+  margin-left: 2.564102564102564%;
+  width: 21.076923076923077%;
+  background-color: #fff;
+  padding: 1%;
+  min-height: 210px;
+  margin-bottom: 2.564102564102564%; }
+  .wp-crm-dashboard-boxes span.dashicons {
+    color: #0073aa; }
+
+.wp-crm-widget {
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+  padding: 8px 12px 10px; }
+  .wp-crm-widget:last-child {
+    border-bottom: none;
+    padding-bottom: 8px; }
+
+.wpcrm-dashboard-calendar {
+  float: left;
+  margin-right: 15px; }
+
+.wpcrm-extension {
+  float: left;
+  background: #fff;
+  margin: 0 15px 15px 0;
+  border: 1px solid #ccc;
+  width: 300px;
+  padding: 14px;
+  min-height: 315px;
+  position: relative; }
+
+.wp-crm-email {
+  width: 75%; }
+
+.wp-crm-inline {
+  float: left;
+  padding-right: 3px; }
+
+.wp-crm-five-sixths {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 82.90598290598291%; }
+
+.wp-crm-four-sixths {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 65.81196581196582%; }
+
+.wp-crm-one-fourth {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 23.076923076923077%; }
+
+.wp-crm-one-half {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 48.717948717948715%; }
+
+.wp-crm-one-sixth {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 14.52991452991453%; }
+
+.wp-crm-one-third {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 31.623931623931625%; }
+
+.wp-crm-three-fourths {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 74.35897435897436%; }
+
+.wp-crm-three-sixths {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 48.717948717948715%; }
+
+.wp-crm-two-fourths {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 48.717948717948715%; }
+
+.wp-crm-two-sixths {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 31.623931623931625%; }
+
+.wp-crm-two-thirds {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 65.81196581196582%; }
+
+.wp-crm-one-fifth {
+  float: left;
+  margin-left: 2.564102564102564%;
+  line-height: 21px;
+  width: 17.948718%; }
+
+.wp-crm-first {
+  clear: both;
+  margin-left: 0; }
+
+.about-wrap .wp-crm-one-half {
+  margin: 1em 0 1em 0; }
+
+ul.upsell-features {
+  list-style: disc;
+  margin-left: 20px; }
+
+@media only screen and (min-width: 1603px) {
+  .wpcrm-dashboard {
+    margin: 0 15px 55px 0; } }
+
+@media only screen and (max-width: 960px) {
+  .wp-crm-dashboard-boxes {
+    width: 90%;
+    margin-left: 0; }
+  .wp-crm-five-sixths {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-four-sixths {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-one-fourth {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-one-half {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-one-sixth {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-one-third {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-three-fourths {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-three-sixths {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-two-fourths {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-two-sixths {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-two-thirds {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; }
+  .wp-crm-one-fifth {
+    margin-left: 0;
+    margin-top: 2.564102564102564%;
+    width: 100%; } }
+
+#system-info-textarea.wpcrm-system-help-tip {
+  background: #000;
+  color: #eee;
+  padding: 2em;
+  border: none;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  white-space: pre-wrap; }
+
+body.is-scroll-disabled {
+  overflow: hidden; }
+
+.wpcrm-dashboard-calendar .popup-container {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 1000; }
+  .wpcrm-dashboard-calendar .popup-container.is-active {
+    display: flex; }
+
+.wpcrm-dashboard-calendar .popup-box {
+  background: #fff;
+  margin: auto;
+  border-radius: 0.5rem;
+  max-width: calc(100% - 2rem); }
+
+.wpcrm-dashboard-calendar .popup-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #ddd; }
+  .wpcrm-dashboard-calendar .popup-header h3 {
+    margin: 0; }
+
+.wpcrm-dashboard-calendar .popup-content {
+  padding: 1.5rem;
+  margin: auto;
+  font-size: 1.25em; }
+  .wpcrm-dashboard-calendar .popup-content li {
+    padding: 0.5em 0; }
+  .wpcrm-dashboard-calendar .popup-content .dashicons.wpcrm-dashicons {
+    width: 1.25em;
+    height: 1em; }
+    .wpcrm-dashboard-calendar .popup-content .dashicons.wpcrm-dashicons:before {
+      width: 100%;
+      height: 100%;
+      font-size: 1em;
+      margin-top: 0;
+      text-align: left; }
+
+.wpcrm-dashboard-calendar .popup-trigger {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; }
+  .wpcrm-dashboard-calendar .popup-trigger.is-hidden {
+    display: none; }
+
+.wpcrm-dashboard-calendar {
+  background: white;
+  border: 1px solid #ddd; }
+  .wpcrm-dashboard-calendar table {
+    width: 100%;
+    table-layout: fixed; }
+  .wpcrm-dashboard-calendar thead {
+    background: #fff; }
+    .wpcrm-dashboard-calendar thead .calendar-row.month {
+      background-color: #3199BE; }
+    .wpcrm-dashboard-calendar thead .calendar-row:nth-child(2) .calendar-day-head {
+      text-align: center; }
+    .wpcrm-dashboard-calendar thead .calendar-day-head {
+      border-bottom: 1px solid #ddd;
+      font-weight: 500;
+      padding-top: 1em;
+      padding-bottom: 1em; }
+    .wpcrm-dashboard-calendar thead .calendar-nav a {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0; }
+      .wpcrm-dashboard-calendar thead .calendar-nav a svg {
+        fill: currentColor;
+        max-height: 20px; }
+    .wpcrm-dashboard-calendar thead .calendar-nav-prev a {
+      margin-left: 0; }
+    .wpcrm-dashboard-calendar thead .calendar-nav-next a {
+      margin-right: 0; }
+  .wpcrm-dashboard-calendar tbody {
+    background-color: #fafafa;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f0f0f0' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    font-size: 13px; }
+    .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(1) .calendar-day {
+      border-bottom: none;
+      border-left: 1px solid #ddd; }
+    .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(2) .calendar-day {
+      border-top: 1px solid #ddd; }
+    .wpcrm-dashboard-calendar tbody .calendar-row:last-child .calendar-day {
+      border-bottom: none; }
+    .wpcrm-dashboard-calendar tbody .calendar-day {
+      background: white;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      position: relative; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:last-child {
+        border-right: none; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:first-child {
+        border-left: none; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:hover {
+        background: #fafafa; }
+        .wpcrm-dashboard-calendar tbody .calendar-day:hover .day-number {
+          background: red;
+          color: white; }
+  .wpcrm-dashboard-calendar td {
+    position: relative;
+    padding: 0.5rem; }
+  .wpcrm-dashboard-calendar .calendar-day-np {
+    width: 130px; }
+  .wpcrm-dashboard-calendar .calendar-day-head a {
+    display: block;
+    background: #fafafa;
+    font-size: 12px;
+    color: #333;
+    border-radius: 3px;
+    padding: 1em .5em;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    text-align: center; }
+    .wpcrm-dashboard-calendar .calendar-day-head a:hover {
+      color: white;
+      background: #253C55;
+      border-color: #253C55; }
+  .wpcrm-dashboard-calendar .calendar-day-head h3 {
+    text-align: center;
+    margin: 0;
+    color: #fff; }
+  .wpcrm-dashboard-calendar .day-number {
+    font-size: 12px;
+    height: 2em;
+    width: 2em;
+    line-height: 2;
+    background: #eee;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block; }
+    @media only screen and (max-width: 680px) {
+      .wpcrm-dashboard-calendar .day-number {
+        margin: auto; } }
+  .wpcrm-dashboard-calendar .quick-add {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 2px; }
+  .wpcrm-dashboard-calendar .calendar-icon-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1em 0 0; }
+  @media only screen and (max-width: 680px) {
+    .wpcrm-dashboard-calendar .calendar-row.weekdays .calendar-day-head span {
+      text-align: center; }
+      .wpcrm-dashboard-calendar .calendar-row.weekdays .calendar-day-head span .other-letters {
+        display: none; }
+      .wpcrm-dashboard-calendar .calendar-row.weekdays .calendar-day-head span.sunday {
+        color: red; } }
+
+.wp-crm-email-form {
+  max-width: 50em; }
+  .wp-crm-email-form-filter {
+    max-width: 32em; }
+    .wp-crm-email-form-filter p.submit {
+      margin-top: 0; }
+    .wp-crm-email-form-filter .wp-crm-email-organization {
+      width: 100%; }
+    .wp-crm-email-form-filter .wp-crm-email-categories {
+      background: #fff;
+      margin-right: 1em; }
+      .wp-crm-email-form-filter .wp-crm-email-categories h3.ui-state-default {
+        background: #fff;
+        background-image: none;
+        border: 1px solid;
+        outline-color: #2271b1; }
+  .wp-crm-email-form .wp-crm-email {
+    width: 100%; }
+    .wp-crm-email-form .wp-crm-email-group {
+      margin: 1em 0; }
+    .wp-crm-email-form .wp-crm-email-label {
+      font-size: 1em;
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5em; }
+    .wp-crm-email-form .wp-crm-email-input {
+      display: block;
+      background: #F9F9F9;
+      border: 1px solid #ccc;
+      padding: 0.5em 1em;
+      font-size: 1.25em; }
+    .wp-crm-email-form .wp-crm-email-submit-btn {
+      background: #101010;
+      color: #fff;
+      border: none;
+      margin-top: 0; }
+    .wp-crm-email-form .wp-crm-email-notice {
+      background: #fff;
+      border: 0.0625em solid #c3c4c7;
+      border-left-width: 0.25em;
+      box-shadow: 0 0.0625em 0.0625em rgba(0, 0, 0, 0.4);
+      padding: 0.75em;
+      margin: 0.375em 0 1em; }
+      .wp-crm-email-form .wp-crm-email-notice-warning {
+        border-left-color: #dba617; }
+
+.wpcrm-dashboard {
+  background: #fff;
+  position: relative;
+  padding: 1rem;
+  box-sizing: border-box; }
+  .wpcrm-dashboard h3 {
+    margin-top: 0; }
+
+.wpcrm-dashboard-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  .wpcrm-dashboard-wrapper .wpcrm-dashboard-calendar {
+    flex: 0 0 100%;
+    margin-bottom: 1em; }
+  .wpcrm-dashboard-wrapper .wpcrm-dashboard {
+    width: 100%;
+    flex: 0 0 calc(25% - 10px);
+    max-width: calc(25% - 10px);
+    margin-bottom: 1em;
+    border: 1px solid #ddd; }
+    .wpcrm-dashboard-wrapper .wpcrm-dashboard.wpcrm-dashboard-form-wrapper select {
+      width: 100%;
+      max-width: unset; }
+    .wpcrm-dashboard-wrapper .wpcrm-dashboard.wpcrm-dashboard-form-wrapper table {
+      font-size: 1em; }
+    @media only screen and (min-width: 1603px) {
+      .wpcrm-dashboard-wrapper .wpcrm-dashboard {
+        margin: 0 0 3.5em; } }
+    @media only screen and (max-width: 992px) {
+      .wpcrm-dashboard-wrapper .wpcrm-dashboard {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px); } }
+    @media only screen and (max-width: 680px) {
+      .wpcrm-dashboard-wrapper .wpcrm-dashboard {
+        flex: 0 0 100%;
+        max-width: 100%; } }
+
+.wpcrm-dashboard-nav {
+  margin-top: 40px;
+  padding-top: 0; }
+  .wpcrm-dashboard-nav .nav-tab {
+    margin-top: 10px; }
+
+@media only screen and (min-width: 993px) and (max-width: 1366px) {
+  #address_book_results .wpcrm-gravatar-wrapper {
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: 0;
+    margin-bottom: 8px; }
+    #address_book_results .wpcrm-gravatar-wrapper img {
+      float: none;
+      display: inline-block; } }
+
+@media only screen and (max-width: 800px) {
+  .wpcrm-dashboard-nav {
+    border-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+    .wpcrm-dashboard-nav .nav-tab {
+      display: block;
+      flex: 0 0 calc(25% - 10px);
+      max-width: calc(25% - 10px);
+      margin: 10px 10px 0 0;
+      padding: 5px 10px;
+      border-bottom: 1px solid #c3c4c7;
+      box-sizing: border-box; } }
+
+@media only screen and (max-width: 680px) {
+  .wpcrm-dashboard-actions select {
+    max-width: unset;
+    margin-bottom: 0.5em; }
+  .wpcrm-dashboard-nav .nav-tab {
+    flex: 0 0 calc(50% - 10px);
+    max-width: calc(50% - 10px); } }
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    transform: translateY(-300px);
+    opacity: 0; }
+  to {
+    transform: translateY(0);
+    opacity: 1; } }
+@keyframes animatetop {
+  from {
+    transform: translateY(-300px);
+    opacity: 0; }
+  to {
+    transform: translateY(0);
+    opacity: 1; } }
+
+.wcs-modal {
+  display: none;
+  position: fixed;
+  /* Stay in place */
+  z-index: 100000;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  justify-content: center;
+  align-items: center;
+  /* Modal Content/Box */ }
+  .wcs-modal.is-open {
+    display: flex; }
+  .wcs-modal .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 762px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+            animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+            animation-duration: 0.4s;
+    /* Modal Header */
+    /* Modal Body */ }
+    .wcs-modal .modal-content .modal-header {
+      padding: 2px 16px;
+      background-color: #3199BE;
+      color: white;
+      /* The Close Button */ }
+      .wcs-modal .modal-content .modal-header .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        top: 50%;
+        transform: translate(0, 50%); }
+      .wcs-modal .modal-content .modal-header .close:hover,
+      .wcs-modal .modal-content .modal-header .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer; }
+      .wcs-modal .modal-content .modal-header h2 {
+        color: #fff !important; }
+    .wcs-modal .modal-content .modal-body {
+      padding: 2px 16px; }
+      .wcs-modal .modal-content .modal-body .message {
+        display: none;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 3px; }
+        .wcs-modal .modal-content .modal-body .message.success {
+          display: block;
+          color: #270;
+          background-color: #DFF2BF; }
+        .wcs-modal .modal-content .modal-body .message.error {
+          display: block;
+          color: #D8000C;
+          background-color: #FFBABA; }
+      .wcs-modal .modal-content .modal-body input, .wcs-modal .modal-content .modal-body select {
+        display: block;
+        width: 100%;
+        border-style: solid;
+        border-width: 1px; }
+
+#wpcrm-default-fields .postbox-header {
+  background-color: #3199BE; }
+
+#wpcrm-default-fields .postbox-header h2,
+#wpcrm-default-fields.postbox .handle-order-higher,
+#wpcrm-default-fields.postbox .handle-order-lower,
+#wpcrm-default-fields.postbox .toggle-indicator {
+  color: white; }
+
+p.wcs-required,
+span.wcs-required {
+  color: red;
+  font-style: italic; }
+
+p.description {
+  font-style: italic; }
+
+.quick-add {
+  vertical-align: middle; }
+
+img.avatar.photo {
+  border-radius: 50%;
+  width: 100%;
+  height: auto;
+  max-width: 64px; }
+
+/*# sourceMappingURL=wp-crm.css.map */

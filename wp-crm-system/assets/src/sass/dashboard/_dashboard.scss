@@ -1,0 +1,120 @@
+@import 'system-help';
+@import 'calendar';
+@import 'email';
+
+.wpcrm-dashboard {
+	background: #fff;
+	position: relative;
+	padding: 1rem;
+	box-sizing: border-box;
+	
+	h3 {
+		margin-top: 0;
+	}
+}
+
+.wpcrm-dashboard-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	
+	.wpcrm-dashboard-calendar {
+		flex: 0 0 100%;
+		margin-bottom: 1em;
+	}
+	
+	.wpcrm-dashboard {
+		width: 100%;
+		flex: 0 0 calc(25% - 10px);
+		max-width: calc(25% - 10px);
+		margin-bottom: 1em;
+		border: 1px solid #ddd;
+		
+		&.wpcrm-dashboard-form-wrapper{
+			select{
+				width: 100%;
+				max-width: unset;
+			}
+			
+			table{
+				font-size: 1em;
+			}
+		}
+
+		@media only screen and (min-width: 1603px) {
+			margin: 0 0 3.5em;
+		}
+
+		@media only screen and (max-width: 992px) {
+			flex: 0 0 calc(50% - 10px);
+			max-width: calc(50% - 10px);
+		}
+
+		@media only screen and (max-width: 680px) {
+			flex: 0 0 100%;
+			max-width: 100%;
+		}
+	}
+}
+
+.wpcrm-dashboard-nav{
+    margin-top: 40px;
+	padding-top: 0;
+
+	.nav-tab{
+		margin-top: 10px;
+	}
+}
+
+
+@media only screen and (min-width: 993px) and (max-width: 1366px) {
+	#address_book_results{
+		.wpcrm-gravatar-wrapper{
+			display: block;
+			width: fit-content;
+			margin-left: 0;
+			margin-bottom: 8px;
+			
+
+			img{
+				float: none;
+				display: inline-block;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.wpcrm-dashboard-nav{
+		border-bottom: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		
+		.nav-tab{
+			display: block;
+			flex: 0 0 calc(25% - 10px);
+			max-width: calc(25% - 10px);
+			margin: 10px 10px 0 0;
+			padding: 5px 10px;
+			border-bottom: 1px solid #c3c4c7;
+			box-sizing: border-box;
+		}
+	}
+}
+
+@media only screen and (max-width: 680px) {
+	.wpcrm-dashboard-actions{
+		select{
+			max-width: unset;
+			margin-bottom: 0.5em;
+		}
+	}
+
+	.wpcrm-dashboard-nav{
+		.nav-tab{
+			flex: 0 0 calc(50% - 10px);
+			max-width: calc(50% - 10px);
+		}
+	}
+}

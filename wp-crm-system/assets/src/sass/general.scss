@@ -1,0 +1,27 @@
+#wpcrm-default-fields .postbox-header {
+    background-color: #3199BE;
+}
+#wpcrm-default-fields .postbox-header h2,
+#wpcrm-default-fields.postbox .handle-order-higher,
+#wpcrm-default-fields.postbox .handle-order-lower,
+#wpcrm-default-fields.postbox .toggle-indicator{
+    color: white;
+}
+p.wcs-required,
+span.wcs-required{
+    color: red;
+    font-style: italic;
+}
+p.description{
+    font-style: italic;
+}
+.quick-add{
+    vertical-align: middle;
+}
+
+img.avatar.photo{
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    max-width:  64px;
+}
