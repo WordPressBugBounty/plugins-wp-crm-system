@@ -19,7 +19,7 @@ class WPCRM_System_Create {
 		$title = $first . ' ' . $last;
 
 		if ( false == $email_key ) {
-			$name = get_page_by_title( $title, OBJECT, $type );
+			$name = wcs_get_page_by_title( $title, OBJECT, $type );
 		} else {
 			$pages = get_posts(
 				array(
@@ -86,7 +86,7 @@ class WPCRM_System_Create {
 
 		$title = sanitize_text_field( $fields['title'] );
 
-		$name = get_page_by_title( $title, OBJECT, $type );
+		$name = wcs_get_page_by_title( $title, OBJECT, $type );
 
 		$categories = self::format_categories( $categories, $tax );
 
@@ -136,7 +136,7 @@ class WPCRM_System_Create {
 
 		$title = sanitize_text_field( $fields['title'] );
 
-		$name = get_page_by_title( $title, OBJECT, $type );
+		$name = wcs_get_page_by_title( $title, OBJECT, $type );
 
 		$categories = self::format_categories( $categories, $tax );
 
@@ -184,7 +184,7 @@ class WPCRM_System_Create {
 
 		$title = sanitize_text_field( $fields['title'] );
 
-		$name = get_page_by_title( $title, OBJECT, $type );
+		$name = wcs_get_page_by_title( $title, OBJECT, $type );
 
 		$categories = self::format_categories( $categories, $tax );
 
@@ -234,7 +234,7 @@ class WPCRM_System_Create {
 
 		$title = sanitize_text_field( $fields['title'] );
 
-		$name = get_page_by_title( $title, OBJECT, $type );
+		$name = wcs_get_page_by_title( $title, OBJECT, $type );
 
 		$categories = self::format_categories( $categories, $tax );
 
@@ -283,7 +283,7 @@ class WPCRM_System_Create {
 
 		$title = sanitize_text_field( $fields['title'] );
 
-		$name = get_page_by_title( $title, OBJECT, $type );
+		$name = wcs_get_page_by_title( $title, OBJECT, $type );
 
 		$categories = self::format_categories( $categories, $tax );
 
@@ -714,7 +714,7 @@ class WPCRM_System_Create {
 		if ( ! $title || '' == $title ) {
 			return;
 		}
-		$get_contact = get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-contact' );
+		$get_contact = wcs_get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-contact' );
 
 		if ( is_object( $get_contact ) ) {
 			return $get_contact->ID;
@@ -728,7 +728,7 @@ class WPCRM_System_Create {
 	}
 
 	public static function get_organization( $title ) {
-		$get_org = get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-organization' );
+		$get_org = wcs_get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-organization' );
 
 		if ( is_object( $get_org ) ) {
 			return $get_org->ID;
@@ -740,7 +740,7 @@ class WPCRM_System_Create {
 	}
 
 	public static function get_campaign( $title ) {
-		$get_campaign = get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-campaign' );
+		$get_campaign = wcs_get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-campaign' );
 
 		if ( is_object( $get_campaign ) ) {
 			return $get_campaign->ID;
@@ -753,7 +753,7 @@ class WPCRM_System_Create {
 	}
 
 	public static function get_project( $title ) {
-		$get_project = get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-project' );
+		$get_project = wcs_get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-project' );
 
 		if ( $get_project ) {
 			return $get_project->ID;

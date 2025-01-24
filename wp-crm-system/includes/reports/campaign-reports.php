@@ -303,6 +303,6 @@ function wp_crm_system_process_campaign_form() {
 			$campaign_report .= '<tr><th><strong>Campaign</strong></th><tr><td>' . esc_attr_x( 'No campaigns to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		print $campaign_report;
+		print wp_kses_post( $campaign_report );
 	}
 }

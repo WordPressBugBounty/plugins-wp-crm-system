@@ -242,6 +242,6 @@ function wp_crm_system_process_contact_form() {
 			$contact_report .= '<tr><th><strong>Contact</strong></th><tr><td>' . esc_attr_x( 'No contacts to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		print $contact_report;
+		print wp_kses_post( $contact_report );
 	}
 }

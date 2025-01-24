@@ -29,8 +29,8 @@ function wpcrm_admin_notice__update() {
 		$successclass = 'notice notice-success';
 		$successmessage = __( 'WP-CRM System Update Successful!', 'wp-crm-system' );
 
-		printf( '<div style="display:none;" id="wpcrm_update_status" class="%1$s"><p>%2$s</p></div>', $successclass, $successmessage );
-		printf( '<div id="wpcrm_update_nag" class="%1$s"><p>%2$s</p></div>', $nagclass, $nagmessage );
+		printf( '<div style="display:none;" id="wpcrm_update_status" class="%1$s"><p>%2$s</p></div>', esc_attr( $successclass ), esc_attr( $successmessage ) );
+		printf( '<div id="wpcrm_update_nag" class="%1$s"><p>%2$s</p></div>', esc_attr( $nagclass ), esc_attr( $nagmessage ) );
 	}
 }
 add_action( 'admin_notices', 'wpcrm_admin_notice__update' );

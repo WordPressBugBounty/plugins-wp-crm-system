@@ -1,10 +1,10 @@
 === WordPress CRM Plugin - WP-CRM System ===
 Contributors: pwps, nofearinc
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
-Requires at least: 3.3.0
+Requires at least: 5.9
 Requires PHP: 7.4
-Tested up to: 6.4.2
-Stable tag: 3.2.9.1
+Tested up to: 6.7.1
+Stable tag: 3.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,11 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 3.4.0 =
+* Fix: Security update
+= 3.3.0 =
+* Fix: Depreciated function replacement
+* Fix: Memory leakage on "Create Task"
 = 3.2.9.1 =
 * Fix: Vulnerability on Contact
 = 3.2.9 =

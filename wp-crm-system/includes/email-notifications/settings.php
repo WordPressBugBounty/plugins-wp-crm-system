@@ -41,7 +41,7 @@ $email_fields = array(
 
 <div class="wrap">
 	<div>
-		<h2><?php _e( 'Email Notifications for WP-CRM System', 'wp-crm-system' ); ?></h2>
+		<h2><?php esc_html_e( 'Email Notifications for WP-CRM System', 'wp-crm-system' ); ?></h2>
 		<form method="post" action="options.php">
 			<?php wp_nonce_field( 'wpcrm-email-notifications' ); ?>
 			<?php settings_fields( 'wpcrm-email-notifications' ); ?>
@@ -50,14 +50,14 @@ $email_fields = array(
 					<?php foreach ( $email_fields as $email_field ) { ?>
 					<tr>
 						<td>
-							<h2><?php echo $email_field['name']; ?></h2>
-							<?php echo $email_field['more']; ?>
+							<h2><?php echo esc_attr( $email_field['name'] ); ?></h2>
+							<?php echo esc_attr( $email_field['more'] ); ?>
 						</td>
 						<td>
 						<?php if ( $email_field['input'] == 'textarea' ) { ?>
-							<textarea name="<?php echo $prefix.$email_field['id']; ?>" cols="40" rows="9"><?php echo get_option( $prefix.$email_field['id'] ); ?></textarea>
+							<textarea name="<?php echo esc_attr( $prefix.$email_field['id'] ); ?>" cols="40" rows="9"><?php echo esc_attr( get_option( $prefix.$email_field['id'] ) ); ?></textarea>
 						<?php } else { ?>
-							<input type="<?php echo $email_field['input']; ?>" name="<?php echo $prefix.$email_field['id']; ?>" value="<?php if ( $email_field['input'] == 'text' ) { echo get_option( $prefix.$email_field['id'] ); } else { echo 'yes'; } ?>" <?php if ( $email_field['input'] == 'checkbox' && get_option( $prefix.$email_field['id'] ) == 'yes' ) { echo 'checked'; } ?> />
+							<input type="<?php echo esc_attr( $email_field['input'] ); ?>" name="<?php echo esc_attr( $prefix.$email_field['id'] ); ?>" value="<?php if ( $email_field['input'] == 'text' ) { echo esc_attr( get_option( $prefix.$email_field['id'] ) ); } else { echo 'yes'; } ?>" <?php if ( $email_field['input'] == 'checkbox' && get_option( $prefix.$email_field['id'] ) == 'yes' ) { echo 'checked'; } ?> />
 						<?php } ?>
 						</td>
 					</tr>

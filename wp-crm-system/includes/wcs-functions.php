@@ -866,11 +866,11 @@ function wp_crm_system_get_post_type_list( $id = false, $post_type = false, $fie
 
 	ob_start();
 	?>
-	<select class="wp-crm-system-searchable" name="<?php echo $field_name; ?>">
+	<select class="wp-crm-system-searchable" name="<?php echo esc_attr( $field_name ); ?>">
 		<?php
 		if ( $posts->have_posts() ) {
 			?>
-			<option value=""><?php _e( 'Select an entry', 'wp-crm-system' ); ?></option>
+			<option value=""><?php esc_html_e( 'Select an entry', 'wp-crm-system' ); ?></option>
 			<?php
 		}
 		while ( $posts->have_posts() ) :
@@ -889,10 +889,10 @@ function wp_crm_system_get_post_type_list( $id = false, $post_type = false, $fie
 			}
 			?>
 
-		<option value="<?php echo get_the_ID(); ?>" <?php selected( get_the_ID(), $id ); ?>>
+		<option value="<?php echo esc_attr( get_the_ID() ); ?>" <?php selected( get_the_ID(), $id ); ?>>
 								  <?php
 									the_title();
-									echo $type;
+									echo esc_html( $type );
 									?>
 		</option>
 
@@ -1861,7 +1861,7 @@ add_action( 'admin_notices', 'wpcrm_save_contact_error_notice', 99 );
 function wpcrm_save_contact_error_notice() {
 
 	if ( isset( $_GET['contact_duplicate'] ) ) {
-		printf( '<div class="error notice"><p><strong>%s</strong></p></div>', __( 'ERROR: This contact has duplicate. Status will be forced into draft.', 'wp-crm-system' ) );
+		printf( '<div class="error notice"><p><strong>%s</strong></p></div>', esc_html__( 'ERROR: This contact has duplicate. Status will be forced into draft.', 'wp-crm-system' ) );
 
 		?>
 		<style type="text/css">
@@ -1882,7 +1882,18 @@ function wpcrm_save_contact_error_notice() {
 add_action( 'admin_init', 'wpcrm_save_duplicate_contact_option' );
 function wpcrm_save_duplicate_contact_option() {
 	if ( isset( $_REQUEST['wpcrm_system_duplicate_contact'] ) ) {
-		update_option( 'wpcrm_system_duplicate_contact', sanitize_text_field( $_REQUEST['wpcrm_system_duplicate_contact'] ) );
+		if ( ! current_user_can( 'manage_options' ) && ! wp_verify_nonce( $_REQUEST['wpcrm-options'], 'update-options' ) ) {
+			exit;
+		}
+
+		$duplicate_type = array(
+			'by_name',
+			'by_email',
+			'disable',
+		);
+		if ( in_array( esc_html( $_REQUEST['wpcrm_system_duplicate_contact'] ), $duplicate_type ) ) {
+			update_option( 'wpcrm_system_duplicate_contact', esc_html( $_REQUEST['wpcrm_system_duplicate_contact'] ) );
+		}
 	}
 }
 
@@ -1915,3 +1926,166 @@ function wcs_get_page_by_title( $page_title, $output = OBJECT, $post_type = 'pag
 
 	return $page_got_by_title;
 }
+
+/**
+ * Select2 Ajax search endpoint
+ *
+ * Gradually moving to Select2
+ *
+ * @since   v3.2.9
+ */
+add_action( 'wp_ajax_wp_crm_search', 'wp_crm_search' );
+function wp_crm_search() {
+
+	/**
+	 * Security
+	 *
+	 * Check if nonce are okay
+	 */
+	if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'wpcrm-nonce' ) ) {
+		wp_die();
+	}
+
+	$data = array();
+	$type = '';
+	$user = false;
+
+	/**
+	 * Response based on $_REQUEST['crm']
+	 *
+	 * We accept CRM based only
+	 */
+	switch ( esc_html( $_REQUEST['crm'] ) ) {
+
+		// Organisation
+		case '_wpcrm_contact-attach-to-organization':
+		case '_wpcrm_opportunity-attach-to-organization':
+		case '_wpcrm_project-attach-to-organization':
+		case '_wpcrm_task-attach-to-organization':
+		case '_wpcrm_campaign-attach-to-organization':
+			$type = 'wpcrm-organization';
+			break;
+
+		// Contact
+		case '_wpcrm_opportunity-attach-to-contact':
+		case '_wpcrm_project-attach-to-contact':
+		case '_wpcrm_task-attach-to-contact':
+		case '_wpcrm_campaign-attach-to-contact':
+		case 'address_book_entry':
+			$type = 'wpcrm-contact';
+			break;
+
+		// Campaign
+		case '_wpcrm_opportunity-attach-to-campaign':
+			$type = 'wpcrm-campaign';
+			break;
+
+		// Project
+		case '_wpcrm_task-attach-to-project':
+		case 'project_list_entry':
+			$type = 'wpcrm-project';
+			break;
+
+		// Task
+		case 'task_list_entry':
+			$type = 'wpcrm-task';
+			break;
+
+		// Opportunity
+		case 'opportunity_list_entry':
+			$type = 'wpcrm-opportunity';
+			break;
+
+		// User, it will use separate query
+		case '_wpcrm_campaign-assigned':
+		case '_wpcrm_opportunity-assigned':
+		case '_wpcrm_project-assigned':
+		case '_wpcrm_task-assignment':
+			$user = true;
+			break;
+	}
+
+	/**
+	 * For WP CRM post types
+	 *
+	 * Uses different query
+	 */
+	if ( ! empty( $type ) ) {
+		$query = new WP_Query(
+			array(
+				's'              => sanitize_text_field( $_GET['q'] ),
+				'post_status'    => 'publish',
+				'posts_per_page' => 10,
+				'post_type'      => $type,
+			)
+		);
+
+		if ( $query->have_posts() ) :
+			while ( $query->have_posts() ) :
+				$query->the_post();
+				$title  = ( mb_strlen( $query->post->post_title ) > 50 ) ? mb_substr( $query->post->post_title, 0, 49 ) . '...' : $query->post->post_title;
+				$data[] = array( $query->post->ID, $title );
+			endwhile;
+		endif;
+	}
+
+	/**
+	 * For WP CRM Users
+	 *
+	 * Fetch based on capabilities set in 'wpcrm_system_select_user_role' option
+	 * Flush $data back to empty array before storing users
+	 * 
+	 * @NOTE: WP_User_Query() search params requires you to have complete name in order to work
+	 * So in theory, a 3 input length yeilds almost no results comparing to WP_Query();
+	 */
+	if ( $user ) {
+		$get_users = new WP_User_Query(
+			array(
+				'search'         => sanitize_text_field( $_GET['q'] ),
+				'search_columns' => array( 'user_login', 'user_email', 'user_url', 'user_nicename', 'display_name' ),
+				'capability__in' => get_option( 'wpcrm_system_select_user_role' ),
+				'number'         => 5,
+				'cache_results' => false,
+			)
+		);
+
+		if ( $get_users->results > 0 ) {
+			$data = array();
+			foreach ( $get_users->results as $user ) {
+				$data[] = array( $user->data->user_login, $user->data->display_name );
+			}
+		}
+	}
+
+	wp_send_json( $data );
+}
+
+/**
+ * Allowing SVG on KSES
+ * 
+ * We are using them on calendar but can be used on any function
+ */
+
+function wpcrm_sanitize_svg_icon( $tags ) {
+	$tags['svg']  = array(
+		'xmlns'       => array(),
+		'fill'        => array(),
+		'viewbox'     => array(),
+		'role'        => array(),
+		'aria-hidden' => array(),
+		'focusable'   => array(),
+	);
+	$tags['path'] = array(
+		'd'    => array(),
+		'fill' => array(),
+	);
+	$tags['g']   = array(
+		'id'              => true,
+		'stroke-width'    => true,
+		'stroke-linecap'  => true,
+		'stroke-linejoin' => true,
+	);
+	return $tags;
+
+}
+add_filter( 'wp_kses_allowed_html', 'wpcrm_sanitize_svg_icon' );

@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 <script type="text/javascript">
 	<?php
 	$dateformat = get_option('wpcrm_system_date_format');
-	echo "var formatOption = '".$dateformat."';";
+	echo "var formatOption = '". esc_html( $dateformat )."';";
 	?>
 	jQuery(document).ready(function() {
 		jQuery('.datepicker').datepicker({
@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	});
 </script>
 <div class="wrap">
-	<h2><?php _e( 'Edit Recurring Entry', 'wp-crm-system' ); ?> - <a href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries" class="button-secondary"><?php _e( 'Cancel - Go Back', 'wp-crm-system' ); ?></a></h2>
+	<h2><?php esc_html_e( 'Edit Recurring Entry', 'wp-crm-system' ); ?> - <a href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries" class="button-secondary"><?php esc_html_e( 'Cancel - Go Back', 'wp-crm-system' ); ?></a></h2>
 
 	<form method="post" action="" class="wp_crm_system_recurring_entry_form">
 		<?php
@@ -35,38 +35,38 @@ if ( !defined( 'ABSPATH' ) ) {
 		}
 		?>
 		<p>
-			<label class="description" for="project_task_id"><?php _e( 'Select the project or task to be recurring', 'wp-crm-system' ); ?></label>
-			<?php echo wp_crm_system_get_post_type_list( $entry->project_task_id, array( 'wpcrm-project', 'wpcrm-task' ), 'project_task_id' ); ?><br/>
+			<label class="description" for="project_task_id"><?php esc_html_e( 'Select the project or task to be recurring', 'wp-crm-system' ); ?></label>
+			<?php echo wp_kses_post( wp_crm_system_get_post_type_list( $entry->project_task_id, array( 'wpcrm-project', 'wpcrm-task' ), 'project_task_id' ) ); ?><br/>
 		</p>
 		<p>
-			<label class="description" for="start_date"><?php _e( 'Select the date this entry should start recurring', 'wp-crm-system' ); ?></label>
-			<input type="text" name="start_date" id="start_date" class="datepicker" value="<?php echo $start_date; ?>" />
+			<label class="description" for="start_date"><?php esc_html_e( 'Select the date this entry should start recurring', 'wp-crm-system' ); ?></label>
+			<input type="text" name="start_date" id="start_date" class="datepicker" value="<?php echo esc_html( $start_date ); ?>" />
 		</p>
 		<p>
-			<label class="description" for="end_date"><?php _e( 'Select the date this entry should stop recurring', 'wp-crm-system' ); ?></label>
-			<input type="text" name="end_date" id="end_date" class="datepicker" value="<?php echo $end_date; ?>" />
+			<label class="description" for="end_date"><?php esc_html_e( 'Select the date this entry should stop recurring', 'wp-crm-system' ); ?></label>
+			<input type="text" name="end_date" id="end_date" class="datepicker" value="<?php echo esc_html( $end_date ); ?>" />
 		</p>
 		<p>
-			<label class="description" for="frequency"><?php _e( 'Repeat every', 'wp-crm-system' ); ?></label>
+			<label class="description" for="frequency"><?php esc_html_e( 'Repeat every', 'wp-crm-system' ); ?></label>
 			<select name="number">
 			<?php
 			$max_number = apply_filters( 'wp_crm_system_max_recurring_entry', 365 );
 			for( $a = 1; $a <= $max_number; $a++ ){ ?>
-				<option value="<?php echo $a; ?>" <?php selected( $a, $entry->number_per_frequency ); ?>><?php echo $a; ?></option>
+				<option value="<?php echo esc_html( $a ); ?>" <?php selected( $a, $entry->number_per_frequency ); ?>><?php echo esc_html( $a ); ?></option>
 			<?php } ?>
 			</select>
 			<select name="frequency">
-				<option value="day" <?php selected( 'day', $entry->frequency ); ?>><?php _e( 'Day(s)', 'wp-crm-system' ); ?></option>
-				<option value="week" <?php selected( 'week', $entry->frequency ); ?>><?php _e( 'Week(s)', 'wp-crm-system' ); ?></option>
-				<option value="month" <?php selected( 'month', $entry->frequency ); ?>><?php _e( 'Month(s)', 'wp-crm-system' ); ?></option>
-				<option value="year" <?php selected( 'year', $entry->frequency ); ?>><?php _e( 'Year(s)', 'wp-crm-system' ); ?></option>
+				<option value="day" <?php selected( 'day', $entry->frequency ); ?>><?php esc_html_e( 'Day(s)', 'wp-crm-system' ); ?></option>
+				<option value="week" <?php selected( 'week', $entry->frequency ); ?>><?php esc_html_e( 'Week(s)', 'wp-crm-system' ); ?></option>
+				<option value="month" <?php selected( 'month', $entry->frequency ); ?>><?php esc_html_e( 'Month(s)', 'wp-crm-system' ); ?></option>
+				<option value="year" <?php selected( 'year', $entry->frequency ); ?>><?php esc_html_e( 'Year(s)', 'wp-crm-system' ); ?></option>
 			</select>
 		</p>
 		<p>
 			<hr/><br/>
-			<input type="hidden" name="edit_entry" value="<?php echo $entry->id; ?>"/>
-			<input type="hidden" name="wp_crm_system_recurring_entry_nonce" value="<?php echo wp_create_nonce('wp-crm-system-recurring-entry-nonce'); ?>"/>
-			<input type="submit" class="button-primary" value="<?php _e( 'Save', 'wp-crm-system' ); ?>" />
+			<input type="hidden" name="edit_entry" value="<?php echo esc_html( $entry->id ); ?>"/>
+			<input type="hidden" name="wp_crm_system_recurring_entry_nonce" value="<?php echo esc_html( wp_create_nonce('wp-crm-system-recurring-entry-nonce') ); ?>"/>
+			<input type="submit" class="button-primary" value="<?php esc_html_e( 'Save', 'wp-crm-system' ); ?>" />
 		</p>
 	</form>
 

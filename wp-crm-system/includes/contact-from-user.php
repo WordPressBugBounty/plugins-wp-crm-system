@@ -50,7 +50,7 @@ function wp_crm_system_programmatically_create_contact() {
 	}
 
 	// If the page doesn't already exist, then create it
-	if( null == get_page_by_title( $title, OBJECT, 'wpcrm-contact' ) ) {
+	if( null == wcs_get_page_by_title( $title, OBJECT, 'wpcrm-contact' ) ) {
 
 		// Set the post ID so that we know the post was created successfully
 		$post_id = wp_insert_post(
@@ -85,21 +85,21 @@ function wp_crm_system_programmatically_create_contact() {
 	switch ( $post_id ) {
 		case -1: ?>
 			<div id="message" class="error">
-				<p><strong><?php _e( 'The contact was not created. An error has occurred.', 'wp-crm-system' ); ?></strong></p>
+				<p><strong><?php esc_html_e( 'The contact was not created. An error has occurred.', 'wp-crm-system' ); ?></strong></p>
 			</div>
 			<?php
 			break;
 
 		case -2: ?>
 			<div id="message" class="error">
-				<p><strong><?php _e( 'The contact was not created. A contact with the following name appears to already exist:', 'wp-crm-system' ); ?> <?php echo $title; ?></strong></p>
+				<p><strong><?php esc_html_e( 'The contact was not created. A contact with the following name appears to already exist:', 'wp-crm-system' ); ?> <?php echo esc_attr( $title ); ?></strong></p>
 			</div>
 			<?php
 			break;
 
 		default: ?>
 			<div id="message" class="updated">
-				<p><strong><?php _e( 'New contact created:', 'wp-crm-system' ); ?> <a href="<?php echo get_edit_post_link( $post_id ); ?>"><?php echo $title; ?></a></strong></p>
+				<p><strong><?php esc_html_e( 'New contact created:', 'wp-crm-system' ); ?> <a href="<?php echo esc_url( get_edit_post_link( $post_id ) ); ?>"><?php echo esc_attr( $title ); ?></a></strong></p>
 			</div>
 			<?php
 			break;

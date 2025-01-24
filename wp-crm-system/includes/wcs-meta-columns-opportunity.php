@@ -43,11 +43,11 @@ function wprcm_system_opportunity_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $value ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a start date, display it in the set date format. */
 			else
-				echo $currency_symbol . esc_html( $value );
+				echo esc_html_e( $currency_symbol . $value );
 
 			break;
 		/* If displaying the 'close date' column. */
@@ -58,11 +58,11 @@ function wprcm_system_opportunity_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $close ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a close date, display it in the set date format. */
 			else
-				echo date(get_option('wpcrm_system_php_date_format'),esc_html( $close ) );
+				echo esc_html_e( date(get_option('wpcrm_system_php_date_format'),esc_html( $close ) ) );
 
 			break;
 		/* If displaying the 'probability' column. */
@@ -73,7 +73,7 @@ function wprcm_system_opportunity_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $probability ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a progress, append '%' to the text string. */
 			else
@@ -100,7 +100,7 @@ function wprcm_system_opportunity_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $wonlost ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a wonlost, display it. */
 			else

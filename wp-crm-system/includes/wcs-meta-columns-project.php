@@ -22,7 +22,7 @@ function wp_crm_system_recurring_project_notice(){
 				),
 				esc_url( $url )
 			);
-			echo '<div class="notice notice-success"><p>' . $link . '</p></div>';
+			echo '<div class="notice notice-success"><p>' . wp_kses_post( $link ) . '</p></div>';
 		});
 
 	}
@@ -67,11 +67,11 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $value ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a start date, display it in the set date format. */
 			else
-				echo $currency_symbol . esc_html( $value );
+				echo esc_html( $currency_symbol . $value );
 
 			break;
 		/* If displaying the 'close date' column. */
@@ -82,7 +82,7 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $close ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a close date, display it in the set date format. */
 			else
@@ -92,9 +92,9 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 				 */
 				try{
 					$date = new DateTime( $close );
-					echo $date->format( get_option('wpcrm_system_php_date_format') );
+					echo esc_html( $date->format( get_option('wpcrm_system_php_date_format') ) );
 				} catch( Exception $e ) {
-					echo date( get_option('wpcrm_system_php_date_format'), esc_html( $close ) );
+					echo esc_html( date( get_option('wpcrm_system_php_date_format'), esc_html( $close ) ) );
 				}
 
 			break;
@@ -106,7 +106,7 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $progress ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a progress, append '%' to the text string. */
 			else
@@ -132,7 +132,7 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $status ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a status, display it. */
 			else
@@ -282,28 +282,28 @@ function wpcrm_system_project_filter_by_organization() {
 		$status    = isset( $_GET['status'] ) ? trim( sanitize_text_field( $_GET['status'] ) ) : '';
 		?>
 			<select name="progress">
-				<option value=""><?php _e( 'Filter By Progress', 'wp-crm-system' ); ?></option>
+				<option value=""><?php esc_html_e( 'Filter By Progress', 'wp-crm-system' ); ?></option>
 				<?php
 				foreach ( $args as $key => $value ) {
 					printf(
 						'<option value="%s"%s>%s</option>',
-						$key,
+						esc_attr( $key ),
 						selected( $key, $current_v ),
-						$value . '%'
+						esc_attr( $value ) . '%'
 					);
 				}
 				?>
 			</select>
 
 			<select name="status">
-				<option value=""><?php _e( 'Filter By Status', 'wp-crm-system' ); ?></option>
+				<option value=""><?php esc_html_e( 'Filter By Status', 'wp-crm-system' ); ?></option>
 				<?php
 				foreach ( $statuses as $key => $value ) {
 					printf(
 						'<option value="%s" %s>%s</option>',
-						$key,
+						esc_attr( $key ),
 						selected( $key, $status ),
-						$value
+						esc_attr( $value )
 					);
 				}
 				?>

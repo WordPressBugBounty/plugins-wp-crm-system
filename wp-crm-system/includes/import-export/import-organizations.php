@@ -84,7 +84,7 @@ function wp_crm_system_import_organizations_process(){
 
 					if( $i > 0) {
 						// If the page doesn't already exist, then create it
-						if( null == get_page_by_title( $title, OBJECT, 'wpcrm-organization' ) ) {
+						if( null == wcs_get_page_by_title( $title, OBJECT, 'wpcrm-organization' ) ) {
 							$post_id = wp_insert_post(
 								array(
 									'comment_status'	=>	'closed',
@@ -158,13 +158,13 @@ function wp_crm_system_import_organizations_process(){
 				fclose( $handle );
 				?>
 				<div id="message" class="updated">
-					<p><strong><?php _e( 'Organizations uploaded. ', 'wp-crm-system' ); echo $count_added; _e( ' added. ', 'wp-crm-system' ); echo $count_skipped; _e( ' skipped.', 'wp-crm-system' ); ?> </strong></p>
+					<p><strong><?php esc_html_e( 'Organizations uploaded. ', 'wp-crm-system' ); echo esc_attr( $count_added ); esc_html_e( ' added. ', 'wp-crm-system' ); echo esc_attr( $count_skipped ); esc_html_e( ' skipped.', 'wp-crm-system' ); ?> </strong></p>
 				</div>
 			<?php } else { ?>
 			<div id="message" class="error">
 				<?php
 				foreach( $errors as $error ){
-					echo $error;
+					echo wp_kses_post( $error );
 				} ?>
 			</div>
 			<?php }

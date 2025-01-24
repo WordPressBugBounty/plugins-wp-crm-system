@@ -6,7 +6,7 @@ if( ! defined( 'ABSPATH' ) ) {
 // Add Email Notification Settings
 function wp_crm_system_email_setting_tab() {
 	global $wpcrm_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_active_tab == 'email-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=email-notifications"><?php _e( 'Email', 'wp-crm-system' ) ?></a>
+	<a class="nav-tab <?php echo $wpcrm_active_tab == 'email-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=email-notifications"><?php esc_html_e( 'Email', 'wp-crm-system' ) ?></a>
 <?php }
 add_action( 'wpcrm_system_settings_tab', 'wp_crm_system_email_setting_tab' );
 

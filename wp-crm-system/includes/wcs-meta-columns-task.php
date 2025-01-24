@@ -24,7 +24,7 @@ function wp_crm_system_recurring_task_notice() {
 					),
 					esc_url( $url )
 				);
-				echo '<div class="notice notice-success"><p>' . $link . '</p></div>';
+				echo '<div class="notice notice-success"><p>' . wp_kses_post( $link ) . '</p></div>';
 			}
 		);
 
@@ -63,12 +63,12 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $start ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a start date, display it in the set date format. */
 			else {
-				echo date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $start ) );
+				echo esc_attr( date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $start ) ) );
 			}
 
 			break;
@@ -79,12 +79,12 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $due ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a due date, display it in the set date format. */
 			else {
-				echo date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $due ) );
+				echo esc_html( date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $due ) ) );
 			}
 
 			break;
@@ -95,7 +95,7 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $progress ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a progress, append '%' to the text string. */
@@ -120,7 +120,7 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 			);
 			/* If no duration is found, output a default message. */
 			if ( empty( $priority ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a priority, display it. */
@@ -143,7 +143,7 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $status ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a status, display it. */
@@ -158,7 +158,7 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 					}
 					$html .= '<option value="' . $key . '_' . $post_id . '" ' . $selected . '>' . $the_status . '</option>';
 				}
-				echo $html;
+				echo wp_kses_post( $html );
 			}
 
 			break;
@@ -303,7 +303,7 @@ function wpcrm_system_task_filtering( $post_type ) {
 	foreach ( $statuses as $key => $value ) {
 		$options .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $selected_status, $key, false ), $value );
 	}
-	printf( '<select name="task-status-filter">%s</select>', $options );
+	printf( '<select name="task-status-filter">%s</select>', esc_attr( $options ) );
 
 	/**
 	 * For priority filter

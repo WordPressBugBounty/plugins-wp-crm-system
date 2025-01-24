@@ -53,10 +53,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-yes wpcrm-dashicons" title="<?php _e( 'Task Name', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-yes wpcrm-dashicons" title="<?php esc_html_e( 'Task Name', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<a href="<?php echo get_edit_post_link( $task_id ); ?>"><?php echo trim( $title ); ?></a>
+				<a href="<?php echo esc_url( get_edit_post_link( $task_id ) ); ?>"><?php echo esc_attr( trim( $title ) ); ?></a>
 			</td>
 		</tr>
 		<?php
@@ -65,10 +65,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-building wpcrm-dashicons" title="<?php _e( 'Company', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-building wpcrm-dashicons" title="<?php esc_html_e( 'Company', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $company; ?>
+				<?php echo wp_kses_post( $company ); ?>
 			</td>
 		</tr>
 		<?php
@@ -77,10 +77,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-id wpcrm-dashicons" title="<?php _e( 'Contact Name', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-id wpcrm-dashicons" title="<?php esc_html_e( 'Contact Name', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $contact; ?>
+				<?php echo wp_kses_post( $contact ); ?>
 			</td>
 		</tr>
 		<?php
@@ -89,10 +89,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-clipboard wpcrm-dashicons" title="<?php _e( 'Related Project', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-clipboard wpcrm-dashicons" title="<?php esc_html_e( 'Related Project', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $project; ?>
+				<?php echo wp_kses_post( $project ); ?>
 			</td>
 		</tr>
 		<?php
@@ -101,10 +101,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-businessman wpcrm-dashicons" title="<?php _e( 'Assigned to User', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-businessman wpcrm-dashicons" title="<?php esc_html_e( 'Assigned to User', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $user_display; ?>
+				<?php echo esc_attr( $user_display ); ?>
 			</td>
 		</tr>
 		<?php
@@ -113,10 +113,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-calendar-alt wpcrm-dashicons" title="<?php _e( 'Start Date', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-calendar-alt wpcrm-dashicons" title="<?php esc_html_e( 'Start Date', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $startdate; ?>
+				<?php echo esc_attr( $startdate ); ?>
 			</td>
 		</tr>
 		<?php
@@ -125,10 +125,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-calendar-alt wpcrm-dashicons" title="<?php _e( 'Due Date', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-calendar-alt wpcrm-dashicons" title="<?php esc_html_e( 'Due Date', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $duedate; ?>
+				<?php echo esc_attr( $duedate ); ?>
 			</td>
 		</tr>
 		<?php
@@ -137,10 +137,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-warning wpcrm-dashicons" title="<?php _e( 'Priority', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-warning wpcrm-dashicons" title="<?php esc_html_e( 'Priority', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo $priority; ?>
+				<?php echo esc_attr( $priority ); ?>
 			</td>
 		</tr>
 		<?php
@@ -149,10 +149,10 @@ function wp_crm_system_ajax_task_list() {
 		?>
 		<tr>
 			<td>
-				<span class="wpcrm-system-help-tip dashicons dashicons-admin-tools wpcrm-dashicons" title="<?php _e( 'Status', 'wp-crm-system' ); ?>"></span>
+				<span class="wpcrm-system-help-tip dashicons dashicons-admin-tools wpcrm-dashicons" title="<?php esc_html_e( 'Status', 'wp-crm-system' ); ?>"></span>
 			</td>
 			<td>
-				<?php echo trim( $status ); ?>
+				<?php echo esc_attr( trim( $status ) ); ?>
 			</td>
 		</tr>
 		<?php } ?>

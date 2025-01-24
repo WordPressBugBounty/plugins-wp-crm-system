@@ -7,21 +7,21 @@ add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_client_area_upsell_tab', 
 function wpcrm_system_client_area_upsell_tab(){
 	global $wpcrm_active_tab;
 	if( !defined( 'WPCRM_CLIENT_AREA' ) ){ ?>
-		<a class="nav-tab <?php echo $wpcrm_active_tab == 'client-area-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=client-area-upsell"><?php _e( 'Client Area', 'wp-crm-system' ); ?></a>
+		<a class="nav-tab <?php echo $wpcrm_active_tab == 'client-area-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=client-area-upsell"><?php esc_html_e( 'Client Area', 'wp-crm-system' ); ?></a>
 	<?php }
 }
 add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_custom_fields_upsell_tab', 4 );
 function wpcrm_system_custom_fields_upsell_tab(){
 	global $wpcrm_active_tab;
 	if( !defined( 'WPCRM_CUSTOM_FIELDS' ) ){ ?>
-		<a class="nav-tab <?php echo $wpcrm_active_tab == 'custom-fields-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=custom-fields-upsell"><?php _e( 'Custom Fields', 'wp-crm-system' ); ?></a>
+		<a class="nav-tab <?php echo $wpcrm_active_tab == 'custom-fields-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=custom-fields-upsell"><?php esc_html_e( 'Custom Fields', 'wp-crm-system' ); ?></a>
 	<?php }
 }
 add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_invoicing_upsell_tab', 6 );
 function wpcrm_system_invoicing_upsell_tab(){
 	global $wpcrm_active_tab;
 	if( !defined( 'WPCRM_INVOICING' ) ){ ?>
-		<a class="nav-tab <?php echo $wpcrm_active_tab == 'invoicing-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=invoicing-upsell"><?php _e( 'Invoicing', 'wp-crm-system' ); ?></a>
+		<a class="nav-tab <?php echo $wpcrm_active_tab == 'invoicing-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=invoicing-upsell"><?php esc_html_e( 'Invoicing', 'wp-crm-system' ); ?></a>
 	<?php }
 }
 add_action( 'wpcrm_system_settings_content', 'wpcrm_system_upsell_content' );

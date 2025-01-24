@@ -66,9 +66,9 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 
 	foreach ( $defaultFields as $defaultField ) {
 		if ( current_user_can( $defaultField['capability'], $post_id ) ) {
-			if ( isset( $_POST[ '_wpcrm_' . $defaultField['name'] ] ) && trim( $_POST[ '_wpcrm_' . $defaultField['name'] ] ) != '' ) {
+			if ( isset( $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ] ) && trim( $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ] ) != '' ) {
 				//Get field's value
-				$value = $_POST[ '_wpcrm_' . $defaultField['name'] ];
+				$value = $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ];
 				$safevalue = '';
 				$contactTitle = array();
 				/** Validate and sanitize input **/
@@ -202,7 +202,7 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 						break;
 					}
 					case 'addcontact': {
-						$new_title = sanitize_text_field( $_POST[ '_wpcrm_' . $defaultField['name'] ] );
+						$new_title = sanitize_text_field( $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ] );
 						$new_slug = preg_replace("/[^A-Za-z0-9]/",'',strtolower($new_title));
 						global $post;
 						$currentid = $post->ID;
@@ -220,13 +220,13 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 								'post_type'     => 'wpcrm-contact'
 							));
 							$safevalue = $wpdb->insert_id;
-							update_post_meta( $currentid, substr( '_wpcrm_' . $defaultField[ 'name' ], 0, -4), $safevalue );
+							update_post_meta( $currentid, substr( '_wpcrm_' . esc_attr( $defaultField['name'] ), 0, -4), $safevalue );
 							$wpdb->flush();
 						}
 						break;
 					}
 					case 'addorganization': {
-						$new_org_title = sanitize_text_field( $_POST[ '_wpcrm_' . $defaultField['name'] ] );
+						$new_org_title = sanitize_text_field( $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ] );
 						$new_org_slug = preg_replace("/[^A-Za-z0-9]/",'',strtolower($new_org_title));
 						global $post;
 						$currentid = $post->ID;
@@ -250,7 +250,7 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 						break;
 					}
 					case 'addproject': {
-						$new_title = sanitize_text_field( $_POST[ '_wpcrm_' . $defaultField['name'] ] );
+						$new_title = sanitize_text_field( $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ] );
 						$new_slug = preg_replace("/[^A-Za-z0-9]/",'',strtolower($new_title));
 						global $post;
 						$currentid = $post->ID;
@@ -268,13 +268,13 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 								'post_type'     => 'wpcrm-project'
 							));
 							$safevalue = $wpdb->insert_id;
-							update_post_meta( $currentid, substr( '_wpcrm_' . $defaultField[ 'name' ], 0, -4), $safevalue );
+							update_post_meta( $currentid, substr( '_wpcrm_' . esc_attr( $defaultField['name'] ), 0, -4), $safevalue );
 							$wpdb->flush();
 						}
 						break;
 					}
 					case 'addcampaign': {
-						$new_title = sanitize_text_field( $_POST[ '_wpcrm_' . $defaultField['name'] ] );
+						$new_title = sanitize_text_field( $_POST[ '_wpcrm_' . esc_attr( $defaultField['name'] ) ] );
 						$new_slug = preg_replace("/[^A-Za-z0-9]/",'',strtolower($new_title));
 						global $post;
 						$currentid = $post->ID;
@@ -292,7 +292,7 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 								'post_type'     => 'wpcrm-campaign'
 							));
 							$safevalue = $wpdb->insert_id;
-							update_post_meta( $currentid, substr( '_wpcrm_' . $defaultField[ 'name' ], 0, -4), $safevalue );
+							update_post_meta( $currentid, substr( '_wpcrm_' . esc_attr( $defaultField['name'] ), 0, -4), $safevalue );
 							$wpdb->flush();
 						}
 						break;
@@ -300,10 +300,10 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 					default: {
 						// Sanitize text field
 						$safevalue = sanitize_text_field( $value );
-						if ( 'contact-first-name' == $defaultField['name'] ) {
+						if ( 'contact-first-name' == esc_attr( $defaultField['name'] ) ) {
 							$contactFirst = $safevalue;
 						}
-						if ( 'contact-last-name' == $defaultField['name'] ) {
+						if ( 'contact-last-name' == esc_attr( $defaultField['name'] ) ) {
 							$contactLast = $safevalue;
 						}
 						if ( ! empty( $contactFirst ) && ! empty( $contactLast ) ) {
@@ -312,9 +312,9 @@ function saveWPCRMSystemFields( $post_id, $post ) {
 						break;
 					}
 				}
-				update_post_meta( $post_id, '_wpcrm_' . $defaultField[ 'name' ], $safevalue );
+				update_post_meta( $post_id, '_wpcrm_' . esc_attr( $defaultField['name'] ), $safevalue );
 			} else {
-				delete_post_meta( $post_id, '_wpcrm_' . $defaultField[ 'name' ] );
+				delete_post_meta( $post_id, '_wpcrm_' . esc_attr( $defaultField['name'] ) );
 			}
 		}
 	}
@@ -473,12 +473,12 @@ function wpcrmGmap() {
 		?>
 
 		<!-- google map will be shown here -->
-		<div id="gmap_canvas"><?php _e('Loading map...','wp-crm-system'); ?></div>
-		<div id='map-label'><?php _e('Map shows approximate location.','wp-crm-system'); ?></div>
+		<div id="gmap_canvas"><?php esc_html_e('Loading map...','wp-crm-system'); ?></div>
+		<div id='map-label'><?php esc_html_e('Map shows approximate location.','wp-crm-system'); ?></div>
 
 		<?php
 	} else {
-		_e('No Map Found. Please enter an address or verify the address details are correct.','wp-crm-system');
+		esc_html_e('No Map Found. Please enter an address or verify the address details are correct.','wp-crm-system');
 	} ?>
 </div>
 <?php
@@ -494,9 +494,9 @@ function wpcrmOpportunityOptions() {
 	$slug = preg_replace("/[^A-Za-z0-9]/",'',strtolower($title));
 
 	$projectFromOpportunity = "//" . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] ) . '&wpcrm-system-action=new-project-from-opportunity';
-	echo __( 'Save changes before clicking below.', 'wp-crm-system' );
+	echo esc_html__( 'Save changes before clicking below.', 'wp-crm-system' );
 	echo '<ul>';
-	echo '<li><a class="button" href="' . esc_url( $projectFromOpportunity ) . '">' . __( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
+	echo '<li><a class="button" href="' . esc_url( $projectFromOpportunity ) . '">' . esc_html__( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
 	echo '</ul>';
 
 	if ( isset( $_GET['wpcrm-system-action'] ) ) {
@@ -567,9 +567,9 @@ function wpcrmOpportunityOptions() {
 				}
 			}
 
-			echo '<div class="updated"><p>'.__('New Project Added!','wp-crm-system-zendesk').'</p></div>';
+			echo '<div class="updated"><p>'.esc_html__('New Project Added!','wp-crm-system-zendesk').'</p></div>';
 			} else {
-				echo '<div class="error"><p>'.__('Project not added. A project with this name already exists: ','wp-crm-system-zendesk').$title.'</p></div>';
+				echo '<div class="error"><p>'.esc_html__('Project not added. A project with this name already exists: ','wp-crm-system-zendesk') . esc_attr( $title ) . '</p></div>';
 			}
 		}
 	}
@@ -598,9 +598,9 @@ function wpcrmListTasksinProjects() {
 		}
 	}
 	if ($task_report != '') {
-		echo '<ul>' . $task_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $task_report ) . '</ul>';
 	} else {
-		_e('No tasks assigned to this project.','wp-crm-system');
+		esc_html_e('No tasks assigned to this project.','wp-crm-system');
 	}
 	wp_reset_postdata();
 }
@@ -628,9 +628,9 @@ function wpcrmListProjectsinContact() {
 		}
 	}
 	if ($project_report != '') {
-		echo '<ul>' . $project_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $project_report ) . '</ul>';
 	} else {
-		_e('No projects assigned to this contact.','wp-crm-system');
+		esc_html_e('No projects assigned to this contact.','wp-crm-system');
 	}
 	wp_reset_postdata();
 }
@@ -658,16 +658,16 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
 		}
 	}
 	if ($task_report != '') {
-		echo '<ul>' . $task_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $task_report ) . '</ul>';
 	} else {
-		_e('No tasks assigned to this contact.','wp-crm-system');
+		esc_html_e('No tasks assigned to this contact.','wp-crm-system');
 	}
 	$task_url = admin_url('post-new.php');
 	$task_url = add_query_arg( array(
 		'post_type' => 'wpcrm-task',
 		'contact' => get_the_ID(),
 	), $task_url );
-	echo '<a href="' . $task_url . '" target="_blank"><p>+ ' . __('Add New Task', 'wp-crm-system') . '</p</a>';
+	echo '<a href="' . esc_url( $task_url ) . '" target="_blank"><p>+ ' . esc_html__('Add New Task', 'wp-crm-system') . '</p</a>';
 	wp_reset_postdata();
 }
 function wpcrm_system_GDPR_metabox(){
@@ -680,14 +680,14 @@ function wpcrm_system_GDPR_metabox(){
 	}
 	wp_nonce_field( 'wpcrm-system-gdpr-secret', 'wpcrm_system_gdpr_secret_wpnonce', false, true );
 	?>
-	<label for="_wpcrm_system_gdpr_secret"><?php _e( 'Secret key for GDPR link', 'wp-crm-system' ); ?></label>
-	<input type="text" id="_wpcrm_system_gdpr_secret" name="_wpcrm_system_gdpr_secret" value="<?php echo $secret; ?>" />
+	<label for="_wpcrm_system_gdpr_secret"><?php esc_html_e( 'Secret key for GDPR link', 'wp-crm-system' ); ?></label>
+	<input type="text" id="_wpcrm_system_gdpr_secret" name="_wpcrm_system_gdpr_secret" value="<?php echo esc_attr( $secret ); ?>" />
 	<?php
 	if ( $show_url ){
-		echo wpcrm_system_gdpr_page( $post->ID, $secret );?>
+		echo wp_kses_post( wpcrm_system_gdpr_page( $post->ID, $secret ) );?>
 	<?php
 	} else {
-		echo wpcrm_system_gdpr_page( $post->ID, '' );
+		echo wp_kses_post( wpcrm_system_gdpr_page( $post->ID, '' ) );
 	}
 }
 
@@ -737,16 +737,16 @@ function wpcrmListOpportunitiesinContact() {
 		}
 	}
 	if ($opportunity_report != '') {
-		echo '<ul>' . $opportunity_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $opportunity_report ) . '</ul>';
 	} else {
-		_e('No opportunities assigned to this contact.','wp-crm-system');
+		esc_html_e('No opportunities assigned to this contact.','wp-crm-system');
 	}
 	$task_url = admin_url('post-new.php');
 	$task_url = add_query_arg( array(
 		'post_type' => 'wpcrm-opportunity',
 		'contact' => get_the_ID(),
 	), $task_url );
-	echo '<a href="' . $task_url . '" target="_blank"><p>+ ' . __('Add New Opportunity', 'wp-crm-system') . '</p></a>';
+	echo '<a href="' . esc_url( $task_url ) . '" target="_blank"><p>+ ' . esc_html__('Add New Opportunity', 'wp-crm-system') . '</p></a>';
 	wp_reset_postdata();
 }
 function wpcrmListProjectsinOrganizations() {
@@ -773,9 +773,9 @@ function wpcrmListProjectsinOrganizations() {
 		}
 	}
 	if ($project_report != '') {
-		echo '<ul>' . $project_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $project_report ) . '</ul>';
 	} else {
-		_e('No projects assigned to this organization.','wp-crm-system');
+		esc_html_e('No projects assigned to this organization.','wp-crm-system');
 	}
 	wp_reset_postdata();
 }
@@ -803,9 +803,9 @@ function wpcrmListTasksinOrganizations() {
 		}
 	}
 	if ($task_report != '') {
-		echo '<ul>' . $task_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $task_report ) . '</ul>';
 	} else {
-		_e('No tasks assigned to this organization.','wp-crm-system');
+		esc_html_e('No tasks assigned to this organization.','wp-crm-system');
 	}
 	wp_reset_postdata();
 }
@@ -833,9 +833,9 @@ function wpcrmListOpportunitiesinOrganizations() {
 		}
 	}
 	if ($opportunity_report != '') {
-		echo '<ul>' . $opportunity_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $opportunity_report ) . '</ul>';
 	} else {
-		_e('No opportunities assigned to this organization.','wp-crm-system');
+		esc_html_e('No opportunities assigned to this organization.','wp-crm-system');
 	}
 	wp_reset_postdata();
 }
@@ -863,9 +863,9 @@ function wpcrmListContactsinOrg() {
 		}
 	}
 	if ($contact_report != '') {
-		echo '<ul>' . $contact_report . '</ul>';
+		echo '<ul>' . wp_kses_post( $contact_report ) . '</ul>';
 	} else {
-		_e('No contacts assigned to this organization.','wp-crm-system');
+		esc_html_e('No contacts assigned to this organization.','wp-crm-system');
 	}
 	wp_reset_postdata();
 }
@@ -877,8 +877,8 @@ global $post;
 $defaultFields = wpcrm_system_fields();
 ?>
 <div class="form-wrap">
-	<p class="wcs-required"><?php _e( 'Fields with (*) are required including the title.', 'wp-crm-system' ); ?></p>
-	<p class="description"><?php _e( 'Click on the + sign for adding new entry on the dropdowns.', 'wp-crm-system' ); ?></p>
+	<p class="wcs-required"><?php esc_html_e( 'Fields with (*) are required including the title.', 'wp-crm-system' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Click on the + sign for adding new entry on the dropdowns.', 'wp-crm-system' ); ?></p>
 	<?php
 	wp_nonce_field( 'wpcrm-fields', 'wpcrm-fields_wpnonce', false, true );
 	foreach ( $defaultFields as $defaultField ) {
@@ -907,12 +907,12 @@ $defaultFields = wpcrm_system_fields();
 					if ( $projectmeta == '' ) {
 						$before = $defaultField[ 'before' ];
 						$after = $defaultField[ 'after' ];
-						echo $before;
-						echo '<div class="form-field form-required ' . $defaultField[ 'style' ] . '">';
-						echo '<label for="' . '_wpcrm_' . $defaultField['name'] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-						echo '<input type="text" name="' . '_wpcrm_' . $defaultField['name'] . '" id="' . '_wpcrm_' . $defaultField['name'] . '" value="" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+						echo wp_kses_post( $before );
+						echo '<div class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+						echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="" placeholder="' . esc_html__($defaultField['placeholder'],'wp-crm-system') . '" />';
 						echo '</div>';
-						echo $after;
+						echo wp_kses_post( $after );
 					}
 					break;
 				}
@@ -921,12 +921,12 @@ $defaultFields = wpcrm_system_fields();
 					if ( $orgmeta == '' ) {
 						$before = $defaultField[ 'before' ];
 						$after = $defaultField[ 'after' ];
-						echo $before;
-						echo '<div class="form-field form-required ' . $defaultField[ 'style' ] . '">';
-						echo '<label for="' . '_wpcrm_' . $defaultField['name'] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-						echo '<input type="text" name="' . '_wpcrm_' . $defaultField['name'] . '" id="' . '_wpcrm_' . $defaultField['name'] . '" value="" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+						echo wp_kses_post( $before );
+						echo '<div class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+						echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="" placeholder="' . esc_html__($defaultField['placeholder'],'wp-crm-system') . '" />';
 						echo '</div>';
-						echo $after;
+						echo wp_kses_post( $after );
 					}
 					break;
 				}
@@ -935,12 +935,12 @@ $defaultFields = wpcrm_system_fields();
 					if ( $contactmeta == '' ) {
 						$before = $defaultField[ 'before' ];
 						$after = $defaultField[ 'after' ];
-						echo $before;
-						echo '<div class="form-field form-required ' . $defaultField[ 'style' ] . '">';
-						echo '<label for="' . '_wpcrm_' . $defaultField['name'] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-						echo '<input type="text" name="' . '_wpcrm_' . $defaultField['name'] . '" id="' . '_wpcrm_' . $defaultField['name'] . '" value="" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+						echo wp_kses_post( $before );
+						echo '<div class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+						echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="" placeholder="' . esc_html__($defaultField['placeholder'],'wp-crm-system') . '" />';
 						echo '</div>';
-						echo $after;
+						echo wp_kses_post( $after );
 					}
 					break;
 				}
@@ -949,12 +949,12 @@ $defaultFields = wpcrm_system_fields();
 					if ( $campaignmeta == '' ) {
 						$before = $defaultField[ 'before' ];
 						$after = $defaultField[ 'after' ];
-						echo $before;
-						echo '<div class="form-field form-required ' . $defaultField[ 'style' ] . '">';
-						echo '<label for="' . '_wpcrm_' . $defaultField['name'] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-						echo '<input type="text" name="' . '_wpcrm_' . $defaultField['name'] . '" id="' . '_wpcrm_' . $defaultField['name'] . '" value="" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+						echo wp_kses_post( $before );
+						echo '<div class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+						echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="" placeholder="' . esc_html__($defaultField['placeholder'],'wp-crm-system') . '" />';
 						echo '</div>';
-						echo $after;
+						echo wp_kses_post( $after );
 					}
 					break;
 				}
@@ -971,102 +971,129 @@ $defaultFields = wpcrm_system_fields();
 				case 'selectnameprefix':
 				case 'notifycontact': {
 					// Select
-					$selection = get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true );
-					$editshow = in_array( $defaultField[ 'type' ], array( 'selectprogress', 'selectwonlost', 'selectpriority', 'selectstatus', 'selectnameprefix' ) ) ? 'onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '")' : '';
+					$selection = get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true );
+					$editshow = in_array( $defaultField[ 'type' ], array( 'selectprogress', 'selectwonlost', 'selectpriority', 'selectstatus', 'selectnameprefix' ) ) ? 'onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")' : '';
 					$before = $defaultField[ 'before' ];
 					$after = $defaultField[ 'after' ];
-					echo $before;
-					echo '<div ' . $editshow . ' class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+					echo wp_kses_post( $before );
+					echo '<div ' . wp_kses_post( $editshow ) . ' class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 					//Select User
 					if ( $defaultField[ 'type' ] == "selectuser" ) {
-						echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
 						if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-							echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+							echo '<div class="' .  esc_attr( esc_attr( $defaultField[ 'icon' ] ) ) . '" class="wp-crm-inline"></div>';
 						}
-						$users = get_users();
+
+						/**
+						 * DEPRECIATED, KEEPING FOR NOW UP TO FEW VERSIONS
+						 * 
+						 * We can revert in case some plugin incompatibility
+						
+						$users = get_users(); // This part will be problematic on large users sites
 						$wp_crm_users = array();
 						foreach( $users as $user ){
 							if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
 								$wp_crm_users[] = $user;
 							}
+						} 
+						 */
+
+						/**
+						 * Fetching users
+						 * 
+						 * New for v3.2.9
+						 * Uses WP_User_Query class to simplify user fetching for performance update
+						 * 
+						 * @since	v3.2.9
+						 */
+						$wp_crm_users = array();
+						$get_users    = new WP_User_Query(
+							array(
+								'capability__in' => get_option( 'wpcrm_system_select_user_role' ),
+								'number'         => 5,
+							)
+						);
+						if ( $get_users->results > 0 ) {
+							$wp_crm_users = $get_users->results;
 						}
+
 						$display_name = '';
 						foreach( $wp_crm_users as $user) {
 							if ($selection == $user->data->user_login) { $display_name = $user->data->display_name; }
 							if (!$selection || '' == $selection) { $display_name = __('Not Assigned', 'wp-crm-system'); }
 						}
 						if ( ! empty( $selection ) ){
-							echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $display_name . '</span></label>';
+							echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline">' . esc_attr( $display_name ) . '</span></label>';
 						}
-						echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
+						echo '<select id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '">';
 							echo '<option value="" ' . selected( $selection, '' ) . '>Not Assigned</option>';
 							foreach( $wp_crm_users as $user) {
-								echo '<option value="' . $user->data->user_login . '" ' . selected( $selection, $user->data->user_login ) . '>'. $user->data->display_name .'</option>';
+								echo '<option value="' . esc_attr( $user->data->user_login ) . '" ' . selected( $selection, esc_attr( $user->data->user_login ) ) . '>'. esc_attr( $user->data->display_name ) .'</option>';
 							}
 						echo'</select>';
 					} elseif ( $defaultField[ 'type' ] == "selectcampaign" ) {
-						echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
 						if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-							echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+							echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 						}
 						//Select Campaign
-						$campaigns = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-campaign'));
+						$campaigns = get_posts(array('posts_per_page'=>10,'post_type' => 'wpcrm-campaign'));
 						if ($campaigns) {
 							if ( ! empty( $selection ) ){
 								if ( 'do not show' != $selection ){
 									if ( get_post_status( $selection ) != 'trash' ){
-										echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+										echo '<a id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline;" href="' . esc_url( get_edit_post_link($selection) ) . '">' . wp_kses_post( get_the_title($selection) ) . '</a></label>';
 									}
 								}
 							}
 
-							echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
+							echo '<select id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '">';
 							echo '<option value="" ' . selected( $selection, '' ) . '>Not Assigned</option>';
 							echo '<option value="do not show" ' . selected( $selection, 'do not show' ) . '>Not Applicable</option>';
 							foreach($campaigns as $campaign) {
-								echo '<option value="' . $campaign->ID . '"' . selected( $selection, $campaign->ID ) . '>' . get_the_title($campaign->ID) . '</option>';
+								echo '<option value="' . esc_attr( $campaign->ID ) . '"' . selected( $selection, esc_attr( $campaign->ID ) ) . '>' . wp_kses_post( get_the_title($campaign->ID) ) . '</option>';
 							}
 							echo '</select>';
 						} else {
-							echo '<a href="' . admin_url('edit.php?post_type=wpcrm-campaign') . '">';
-							_e('Please create a campaign first.','wp-crm-system');
+							echo '<a href="' . esc_url( admin_url('edit.php?post_type=wpcrm-campaign') ) . '">';
+							esc_html_e('Please create a campaign first.','wp-crm-system');
 							echo '</a>';
 						}
 					} elseif ( $defaultField[ 'type' ] == "selectorganization" ) {
-						echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
 						if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-							echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+							echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 						}
 						//Select Organization
-						$orgs = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
+						$orgs = get_posts(array('posts_per_page'=>10,'post_type' => 'wpcrm-organization'));
 						if ($orgs) {
 							if ( ! empty( $selection ) ){
 								if ( 'do not show' != $selection ){
 									if ( get_post_status( $selection ) != 'trash' ){
-										echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+										echo '<a id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline;" href="' . esc_url( get_edit_post_link($selection) ) . '">' . wp_kses_post( get_the_title($selection) ) . '</a></label>';
 									}
 								}
 							}
-								echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
+								echo '<select id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" class="wp-crm-system-searchable" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '">';
 								echo '<option value="" ' . selected( $selection, '' ) . '>Not Assigned</option>';
 								echo '<option value="do not show" ' . selected( $selection, 'do not show' ) . '>Not Applicable</option>';
 								foreach( $orgs as $org ) {
 									$orgaddress = ( true == get_option( 'wpcrm_system_show_org_address' ) && '' != get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) ? ' [' . esc_html( get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) . ']' : '';
-									echo '<option value="' . $org->ID . '"' . selected( $selection, $org->ID ) . '>' . esc_html( get_the_title( $org->ID ) ) . $orgaddress . '</option>';
+									echo '<option value="' . esc_attr( $org->ID ) . '"' . selected( $selection, esc_attr( $org->ID ) ) . '>' . esc_html( get_the_title( $org->ID ) ) . esc_attr( $orgaddress ) . '</option>';
 								}
 								echo '</select>';
 							} else {
-							echo '<a href="' . admin_url( 'edit.php?post_type=wpcrm-organization' ) . '">';
-							_e('Please create an organization first.','wp-crm-system');
+							echo '<a href="' . esc_url( admin_url( 'edit.php?post_type=wpcrm-organization' ) ) . '">';
+							esc_html_e('Please create an organization first.','wp-crm-system');
 							echo '</a>';
 						}
 					} elseif ( $defaultField[ 'type' ] == "selectcontact" ) {
-						echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
 						if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-							echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+							echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 						}
 						//Select Contact
-						$contacts = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
+						$contacts = get_posts(array('posts_per_page'=>10,'post_type' => 'wpcrm-contact'));
 						if ($contacts) {
 							if ( ! empty( $_GET['contact'] ) ) {
 								$selection = sanitize_text_field( $_GET['contact'] );
@@ -1074,52 +1101,52 @@ $defaultFields = wpcrm_system_fields();
 							if ( ! empty( $selection ) ){
 								if ( 'do not show' != $selection ){
 									if ( get_post_status( $selection ) != 'trash' ){
-										echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+										echo '<a id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline;" href="' . esc_url( get_edit_post_link($selection) ) . '">' . wp_kses_post( get_the_title($selection) ) . '</a></label>';
 									}
 								}
 							}
-							echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
+							echo '<select id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '">';
 							echo '<option value="" ' . selected( $selection, '' ) . '>Not Assigned</option>';
 							echo '<option value="do not show" ' . selected( $selection, 'do not show' ) . '>Not Applicable</option>';
 							foreach($contacts as $contact) {
-								echo '<option value="' . $contact->ID . '"' . selected( $selection, $contact->ID ) . '>' . get_the_title($contact->ID) . '</option>';
+								echo '<option value="' . esc_attr( $contact->ID ) . '"' . selected( $selection, $contact->ID ) . '>' . wp_kses_post( get_the_title($contact->ID) ) . '</option>';
 							}
 							echo '</select>';
 						} else {
-							echo '<a href="' . admin_url('edit.php?post_type=wpcrm-contact') . '">';
-							_e('Please create a contact first.','wp-crm-system');
+							echo '<a href="' . esc_url( admin_url('edit.php?post_type=wpcrm-contact') ) . '">';
+							esc_html_e('Please create a contact first.','wp-crm-system');
 							echo '</a>';
 						}
 					} elseif ( $defaultField[ 'type' ] == "selectproject" ) {
-						echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
+						echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_html__($defaultField[ 'title' ],'wp-crm-system') . ': </strong>';
 						if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-							echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+							echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 						}
 						//Select Project
-						$projects = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-project'));
+						$projects = get_posts(array('posts_per_page'=>10,'post_type' => 'wpcrm-project'));
 						if ($projects) {
 							if ( ! empty( $selection ) ){
 								if ( 'do not show' != $selection ){
 									if ( get_post_status( $selection ) != 'trash' ){
-										echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+										echo '<a id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline;" href="' . esc_url( get_edit_post_link($selection) ) . '">' . wp_kses_post( get_the_title($selection) ) . '</a></label>';
 									}
 								}
 							}
 
-							echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
+							echo '<select id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '">';
 							echo '<option value="" ' . selected( $selection, '' ) . '>Not Assigned</option>';
 							foreach($projects as $project) {
-								echo '<option value="' . $project->ID . '"' . selected( $selection, $project->ID ) . '>' . get_the_title($project->ID) . '</option>';
+								echo '<option value="' . esc_attr( $project->ID ) . '"' . selected( $selection, $project->ID ) . '>' . wp_kses_post( get_the_title($project->ID) ) . '</option>';
 							}
 							echo '</select>';
 						} else {
-							echo '<a href="' . admin_url('edit.php?post_type=wpcrm-project') . '">';
-							_e('Please create a project first.','wp-crm-system');
+							echo '<a href="' . esc_url( admin_url('edit.php?post_type=wpcrm-project') ) . '">';
+							esc_html_e('Please create a project first.','wp-crm-system');
 							echo '</a>';
 						}
 					} elseif( $defaultField['type'] == 'notifycontact' ) {
-						echo '<label for="_wpcrm_' . $defaultField['name'] . '" style="margin-right:10px;">' . $defaultField['title'] . '</label>';
-						echo '<input type="checkbox"' . checked( $selection, 'on', false ) . 'id="_wpcrm_' . $defaultField['name'] . '" name="_wpcrm_' . $defaultField['name'] . '" >';
+						echo '<label for="_wpcrm_' . esc_attr( $defaultField['name'] ) . '" style="margin-right:10px;">' . esc_attr( $defaultField['title'] ) . '</label>';
+						echo '<input type="checkbox"' . checked( $selection, 'on', false ) . 'id="_wpcrm_' . esc_attr( $defaultField['name'] ) . '" name="_wpcrm_' . esc_attr( $defaultField['name'] ) . '" >';
 
 					} else {
 						// Select progress
@@ -1152,23 +1179,23 @@ $defaultFields = wpcrm_system_fields();
 							$wpcrm_after = '';
 						}
 						?>
-						<label for="<?php echo '_wpcrm_' . $defaultField[ 'name' ]; ?>" style="display:<?php if ( isset( $selection ) && '' != $selection ) { echo 'none'; } else { echo 'inline'; }; ?>" id="<?php echo '_wpcrm_' . $defaultField[ 'name' ]; ?>-label"><strong><?php _e($defaultField[ 'title' ],'wp-crm-system'); ?></strong></label><?php if ( !isset( $selection ) || '' == $selection ) { echo '<br />'; } ?>
-						<select id="<?php echo '_wpcrm_' . $defaultField[ 'name' ] . '-input"'; if ( isset( $selection ) && '' != $selection ) { echo ' style="display:none;"'; } ?> name="<?php echo '_wpcrm_' . $defaultField[ 'name' ]; ?>">
+						<label for="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ); ?>" style="display:<?php if ( isset( $selection ) && '' != $selection ) { echo 'none'; } else { echo 'inline'; }; ?>" id="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ); ?>-label"><strong><?php esc_html_e($defaultField[ 'title' ],'wp-crm-system'); ?></strong></label><?php if ( !isset( $selection ) || '' == $selection ) { echo '<br />'; } ?>
+						<select id="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input"'; if ( isset( $selection ) && '' != $selection ) { echo ' style="display:none;"'; } ?> name="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ); ?>">
 							<?php
 							$display=''; //in case the foreach loop is not entered.
 							foreach ($args as $key => $value) { ?>
-								<option value="<?php echo $key; ?>" <?php if (esc_html( $selection ) == $key) { echo 'selected'; $display = $value; } ?> ><?php echo $value; if ( $defaultField[ 'type' ] == "selectprogress" ) { echo '%'; }?></option>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php if (esc_html( $selection ) == $key) { echo 'selected'; $display = $value; } ?> ><?php echo esc_attr( $value ); if ( $defaultField[ 'type' ] == "selectprogress" ) { echo '%'; }?></option>
 								<?php } ?>
 							</select>
 							<?php if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] && isset ( $selection ) && '' != $selection ){
-								echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+								echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 							} ?>
-							<span id="<?php echo '_wpcrm_' . $defaultField[ 'name' ] . '-text" '; if ( isset( $selection ) && '' != $selection ) { echo 'style="display:inline;"'; } else { echo 'style="display:none;"'; } echo '>' . $display . $wpcrm_after . '</span>'; ?>
-							<span id="<?php echo '_wpcrm_' . $defaultField[ 'name' ] . '-edit"'; if ( isset( $selection ) && '' != $selection ) { echo 'style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")'; } ?> ></span>
+							<span id="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" '; if ( isset( $selection ) && '' != $selection ) { echo 'style="display:inline;"'; } else { echo 'style="display:none;"'; } echo '>' . wp_kses_post( $display . $wpcrm_after ) . '</span>'; ?>
+							<span id="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"'; if ( isset( $selection ) && '' != $selection ) { echo 'style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")'; } ?> ></span>
 								<?php
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 						case 'currency': {
@@ -1176,35 +1203,35 @@ $defaultFields = wpcrm_system_fields();
 							$currency_symbol = wpcrm_system_display_currency_symbol( trim( get_option( 'wpcrm_system_default_currency' ) ) );
 								$before = $defaultField[ 'before' ];
 								$after = $defaultField[ 'after' ];
-								echo $before;
-								echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+								echo wp_kses_post( $before );
+								echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 								if ( isset( $amount ) && '' != $amount ) {
-									echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+									echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 									if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-										echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+										echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 									}
-									echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $currency_symbol . $amount . '</span>';
-									echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $amount . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-									echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+									echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline">' . wp_kses_post( $currency_symbol . $amount ) . '</span>';
+									echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" value="' . esc_attr( $amount ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+									echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 								} else {
-									echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-									echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . $amount . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-									echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+									echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"  id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+									echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="' . esc_attr( $amount ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+									echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 									echo '<br />';
-									echo '<em>' . __('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system') . '</em>';
+									echo '<em>' . esc_attr__('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system') . '</em>';
 								} ?>
-								<span id="<?php echo '_wpcrm_' . $defaultField[ 'name' ] . '-comment'; ?>" style="display:none;"><br />
-								<em><?php _e('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system');?></em></span><?php
+								<span id="<?php echo '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-comment'; ?>" style="display:none;"><br />
+								<em><?php esc_html_e('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system');?></em></span><?php
 								echo '</div>';
-								echo $after;
+								echo wp_kses_post( $after );
 							break;
 						}
 						case 'textarea':
 						case 'wysiwyg': {
-							echo '<div class="form-field form-required ' . $defaultField[ 'style' ] . '">';
-							echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+							echo '<div class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
+							echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 							if ($defaultField[ 'type' ] == 'textarea') {
-								echo '<textarea name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" columns="30" rows="3">' . esc_textarea( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '</textarea>';
+								echo '<textarea name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" columns="30" rows="3">' . esc_textarea( get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true ) ) . '</textarea>';
 							}
 							// WYSIWYG
 							if ( $defaultField[ 'type' ] == "wysiwyg" ) {
@@ -1219,10 +1246,10 @@ $defaultFields = wpcrm_system_fields();
 						}
 						case 'checkbox': {
 							// Checkbox
-							echo '<div class="form-field form-required ' . $defaultField[ 'style' ] . '">';
-							echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-							echo '<input type="checkbox" name="' . '_wpcrm_' . $defaultField['name'] . '" id="' . '_wpcrm_' . $defaultField['name'] . '" value="yes"';
-							if ( get_post_meta( $post->ID, '_wpcrm_' . $defaultField['name'], true ) == "yes" )
+							echo '<div class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
+							echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+							echo '<input type="checkbox" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="yes"';
+							if ( get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true ) == "yes" )
 							echo ' checked="checked"';
 							echo '" style="width: auto;" />';
 							echo '</div>';
@@ -1244,7 +1271,7 @@ $defaultFields = wpcrm_system_fields();
 								<script type="text/javascript">
 									<?php
 									$dateformat = get_option('wpcrm_system_date_format');
-									echo "var formatOption = '".$dateformat."';";
+									echo "var formatOption = '". esc_attr( $dateformat ) ."';";
 									?>
 									jQuery(document).ready(function() {
 										jQuery('.datepicker').datepicker({
@@ -1253,23 +1280,23 @@ $defaultFields = wpcrm_system_fields();
 									});
 								</script>
 								<?php
-							echo $before;
-							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+							echo wp_kses_post( $before );
+							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 							if ( isset( $date ) && '' != $date ) {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 								if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+									echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 								}
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $date . '</span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" autocomplete="off" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons" onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline">' . esc_attr( $date ) . '</span>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" autocomplete="off" class="datepicker" value="' . esc_attr( $date ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons" onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 							} else {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" autocomplete="off" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" autocomplete="off" class="datepicker" value="' . esc_attr( $date ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 						case 'dropbox': {
@@ -1299,23 +1326,23 @@ $defaultFields = wpcrm_system_fields();
 							$email = esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
-							echo $before;
-							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+							echo wp_kses_post( $before );
+							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 							if ( isset( $email ) && '' != $email ) {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 								if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+									echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 								}
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline"><a href="mailto:' . $email . '">' . $email . '</a></span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $email . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline"><a href="mailto:' . esc_html( $email ) . '">' . esc_html( $email ) . '</a></span>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" value="' . esc_html( $email ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 							} else {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . $email . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"  id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="' . esc_html( $email ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 						case 'url': {
@@ -1323,24 +1350,24 @@ $defaultFields = wpcrm_system_fields();
 							$urllink = esc_url( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
-							echo $before;
-							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+							echo wp_kses_post( $before );
+							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 
 							if ( isset( $urllink ) && '' != $urllink ) {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 								if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+									echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 								}
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline"><a href="' . $urllink . '">' . $urllink . '</a></span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $urllink . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline"><a href="' . esc_url( $urllink ) . '">' . esc_url( $urllink ) . '</a></span>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" value="' . esc_url( $urllink ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 							} else {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"  id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="' . esc_url( get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true ) ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 						case 'number': {
@@ -1348,23 +1375,23 @@ $defaultFields = wpcrm_system_fields();
 							$textinput = esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
-							echo $before;
-							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+							echo wp_kses_post( $before );
+							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 							if ( isset( $textinput ) && '' != $textinput ) {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 								if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+									echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 								}
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $textinput . '</span>';
-								echo '<input type="number" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $textinput . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline">' . esc_html( $textinput ) . '</span>';
+								echo '<input type="number" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" value="' . esc_html( $textinput ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 							} else {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-								echo '<input class="' . $defaultField[ 'name' ] . '" type="number" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"  id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
+								echo '<input class="' . esc_attr( $defaultField['name'] ) . '" type="number" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true ) ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 						case 'phone': {
@@ -1372,23 +1399,23 @@ $defaultFields = wpcrm_system_fields();
 							$textinput = esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
-							echo $before;
-							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+							echo wp_kses_post( $before );
+							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 							if ( isset( $textinput ) && '' != $textinput ) {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 								if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+									echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 								}
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline"><a href="tel:' . $textinput . '">' . $textinput . '</a></span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $textinput . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline"><a href="tel:' . esc_html( $textinput ) . '">' . esc_html( $textinput ) . '</a></span>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" value="' . esc_html( $textinput ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 							} else {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-								echo '<input class="' . $defaultField[ 'name' ] . '" type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"  id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
+								echo '<input class="' . esc_attr( $defaultField['name'] ) . '" type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true ) ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 						default: {
@@ -1396,28 +1423,28 @@ $defaultFields = wpcrm_system_fields();
 							$textinput = esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
-							echo $before;
-							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+							echo wp_kses_post( $before );
+							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") onmouseleave=hideEdit("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '") class="form-field form-required ' . esc_attr( $defaultField[ 'style' ] ) . '">';
 							if ( isset( $textinput ) && '' != $textinput ) {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:none;" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
 								if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
-									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+									echo '<div class="' .  esc_attr( $defaultField[ 'icon' ] ) . '" class="wp-crm-inline"></div>';
 								}
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $textinput . '</span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $textinput . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-text" style="display:inline">' . esc_html( $textinput ) . '</span>';
+								echo '<input type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-input" style="display:none;" value="' . esc_html( $textinput ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '")></span>';
 							} else {
-								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-								echo '<input class="' . $defaultField[ 'name' ] . '" type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+								echo '<label for="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'" style="display:inline;"  id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) .'-label"><strong>' . esc_attr__($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
+								echo '<input class="' . esc_attr( $defaultField['name'] ) . '" type="text" name="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . esc_attr( $defaultField['name'] ), true ) ) . '" placeholder="' . esc_attr__($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . esc_attr( $defaultField['name'] ) . '-edit"></span>';
 							}
 							echo '</div>';
-							echo $after;
+							echo wp_kses_post( $after );
 							break;
 						}
 					}
 					?>
-					<?php if ( $defaultField[ 'description' ] ) echo '<p>' . $defaultField[ 'description' ] . '</p>'; ?>
+					<?php if ( $defaultField[ 'description' ] ) echo '<p>' . esc_attr( $defaultField[ 'description' ] ) . '</p>'; ?>
 					<?php
 				}
 			} ?>
@@ -1435,9 +1462,9 @@ function wpcrm_system_display_email() {
 			$sent = date( get_option( 'wpcrm_system_php_date_format' ),esc_html( $email[2] ) ); ?>
 			<div class="email_info">
 			<?php
-				echo __( 'Sent: ', 'wp-crm-system' ) . $sent . __( ' From: ', 'wp-crm-system' ) . $email[0] . ' ' . $email[1] . '<br />';
-				echo __( 'Subject: ', 'wp-crm-system' ) . $email[3] . '<br />';
-				echo __( 'Message: ', 'wp-crm-system' ) . '<br />' . $email[4];
+				echo esc_attr__( 'Sent: ', 'wp-crm-system' ) . esc_attr( $sent ) . esc_attr__( ' From: ', 'wp-crm-system' ) . esc_html( $email[0] ) . ' ' . esc_html( $email[1] ) . '<br />';
+				echo esc_attr__( 'Subject: ', 'wp-crm-system' ) . esc_html( $email[3] ) . '<br />';
+				echo esc_attr__( 'Message: ', 'wp-crm-system' ) . '<br />' . esc_html( $email[4] );
 				echo '<hr />';
 			?>
 			</div>

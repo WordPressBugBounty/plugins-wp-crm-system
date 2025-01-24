@@ -343,6 +343,6 @@ function wp_crm_system_process_task_form() {
 			$task_report .= '<tr><th><strong>Task</strong></th><tr><td>' . esc_attr_x( 'No tasks to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		print $task_report;
+		print wp_kses_post( $task_report );
 	}
 }

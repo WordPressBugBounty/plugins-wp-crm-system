@@ -71,8 +71,24 @@ function wpcrm_scripts_styles( $hook ) {
 	wp_register_style( 'wpcrm-style', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/css/wp-crm.css' );
 	wp_enqueue_style( 'wpcrm-style' );
 	wp_register_script( 'wp_crm_chosen_core_js', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/chosen_v1.6.2/chosen.jquery.min.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
-	wp_register_script( 'wp_crm_searchable', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/wpCRMSystemSearchable.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	wp_register_script( 'wp_crm_searchable', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/wpCRMSystemSearchable.js', array( 'jquery', 'wp_crm_system_select2' ), WP_CRM_SYSTEM_VERSION, false );
+	wp_localize_script(
+		'wp_crm_searchable',
+		'WP_CRM_Dropdown',
+		array(
+			'ajax_url'    => admin_url( 'admin-ajax.php' ),
+			'wpcrm_nonce' => wp_create_nonce( 'wpcrm-nonce' ),
+		)
+	);
 	wp_register_style( 'wp_crm_system_chosen_core_css', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/chosen_v1.6.2/chosen.min.css' );
+
+	/**
+	 * Select 2
+	 * 
+	 * We will do gradual transition from chosen to select2
+	 */
+	wp_enqueue_script( 'wp_crm_system_select2', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/select2-v4.0.13/js/select2.min.js', WP_CRM_SYSTEM_VERSION, false );
+	wp_enqueue_style( 'wp_crm_system_select2', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/select2-v4.0.13/css/select2.min.css', WP_CRM_SYSTEM_VERSION, false );
 
 	if ( $active_page == 'wpcrm-email' ) {
 		wp_enqueue_script( 'select2', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/select2.min.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
@@ -116,7 +132,6 @@ function wpcrm_scripts_styles( $hook ) {
 		wp_register_script( 'wp_crm_chosen_core_js', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/chosen_v1.6.2/chosen.jquery.min.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
 		wp_enqueue_script( 'wp_crm_chosen_core_js' );
 
-		wp_register_script( 'wp_crm_searchable', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/wpCRMSystemSearchable.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
 		wp_enqueue_script( 'wp_crm_searchable' );
 
 		wp_register_style( 'wp_crm_system_chosen_core_css', WP_CRM_SYSTEM_PLUGIN_URL . '/assets/dist/scripts/chosen_v1.6.2/chosen.min.css' );

@@ -130,7 +130,7 @@ function wp_crm_system_import_tasks_process(){
 
 					if( $i > 0) {
 						// If the page doesn't already exist, then create it
-						if( null == get_page_by_title( $title, OBJECT, 'wpcrm-task' ) ) {
+						if( null == wcs_get_page_by_title( $title, OBJECT, 'wpcrm-task' ) ) {
 							$post_id = wp_insert_post(
 								array(
 									'comment_status'	=>	'closed',
@@ -208,17 +208,17 @@ function wp_crm_system_import_tasks_process(){
 				ob_start();
 				?>
 				<div id="message" class="updated">
-					<p><strong><?php _e( 'Tasks uploaded. ', 'wp-crm-system' ); echo $count_added; _e( ' added. ', 'wp-crm-system' ); echo $count_skipped; _e( ' skipped.', 'wp-crm-system' ); ?> </strong></p>
+					<p><strong><?php esc_html_e( 'Tasks uploaded. ', 'wp-crm-system' ); echo esc_attr( $count_added ); esc_html_e( ' added. ', 'wp-crm-system' ); echo esc_attr( $count_skipped ); esc_html_e( ' skipped.', 'wp-crm-system' ); ?> </strong></p>
 				</div>
 				<?php 
 				$content = ob_get_contents();
 				ob_end_clean();
-				echo $content;
+				echo wp_kses_post( $content );
 			} else { ?>
 			<div id="message" class="error">
 				<?php
 				foreach( $errors as $error ){
-					echo $error;
+					echo wp_kses_post( $error );
 				} ?>
 			</div>
 			<?php }

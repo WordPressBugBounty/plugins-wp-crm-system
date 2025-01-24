@@ -332,13 +332,13 @@ function wp_crm_system_import_contacts_process(){
 				fclose( $handle );
 				?>
 				<div id="message" class="updated">
-					<p><strong><?php _e( 'Contacts uploaded. ', 'wp-crm-system' ); echo $count_added; _e( ' added. ', 'wp-crm-system' ); echo $count_updated; _e( ' updated. ', 'wp-crm-system' ); echo $count_skipped; _e( ' skipped.', 'wp-crm-system' ); ?> </strong></p>
+					<p><strong><?php esc_html_e( 'Contacts uploaded. ', 'wp-crm-system' ); echo esc_attr( $count_added ); esc_html_e( ' added. ', 'wp-crm-system' ); echo esc_attr( $count_updated ); esc_html_e( ' updated. ', 'wp-crm-system' ); echo esc_attr( $count_skipped ); esc_html_e( ' skipped.', 'wp-crm-system' ); ?> </strong></p>
 				</div>
 			<?php } else { ?>
 			<div id="message" class="error">
 				<?php
 				foreach( $errors as $error ){
-					echo $error;
+					echo wp_kses_post( $error );
 				} ?>
 			</div>
 			<?php }

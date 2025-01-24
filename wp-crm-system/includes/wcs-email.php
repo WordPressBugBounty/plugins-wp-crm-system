@@ -32,7 +32,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 ?>
 <div class="wrap">
 	<div>
-		<h2><?php _e( 'WP-CRM System Send Email', 'wp-crm-system' ); ?></h2>
+		<h2><?php esc_html_e( 'WP-CRM System Send Email', 'wp-crm-system' ); ?></h2>
 		<?php
 		 // Get Organizations to Filter
 			$organizations = array(
@@ -45,10 +45,10 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 					<?php wp_nonce_field( 'update-options' ); ?>
 					<?php settings_fields( 'wpcrm_system_email_group' ); ?>
 					<?php if ( $organizations ) { ?>
-						<p><strong><?php _e( 'Filter Contacts by Organization', 'wp-crm-system' ); ?></strong></p>
+						<p><strong><?php esc_html_e( 'Filter Contacts by Organization', 'wp-crm-system' ); ?></strong></p>
 						<div>
 						<select class="wp-crm-email-organization" name="wpcrm_system_email_organization_filter" id="wpcrm_system_email_organization_filter">
-							<option value=""><?php _e( 'Do not filter by organization', 'wp-crm-system' ); ?></option>
+							<option value=""><?php esc_html_e( 'Do not filter by organization', 'wp-crm-system' ); ?></option>
 							<?php
 							while ( $loop->have_posts() ) :
 								$loop->the_post();
@@ -60,7 +60,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 								} else {
 									$selected = '';}
 								?>
-								<option value="<?php echo $orgID; ?>"<?php echo $selected; ?> ><?php echo $title; ?></option>
+								<option value="<?php echo esc_attr( $orgID ); ?>"<?php echo esc_attr( $selected ); ?> ><?php echo esc_attr( $title ); ?></option>
 								<?php
 							endwhile;
 							?>
@@ -71,7 +71,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 						?>
 					<div id="wp-crm-system-accordion" class="wp-crm-email-categories">
-						<h3><?php _e( 'Filter Contacts by Categories', 'wp-crm-system' ); ?></h3>
+						<h3><?php esc_html_e( 'Filter Contacts by Categories', 'wp-crm-system' ); ?></h3>
 						<div>
 						<ul>
 							<?php
@@ -80,7 +80,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 									$check = 'checked';
 								} else {
 									$check = ''; }
-								echo '<li><input type="checkbox" name="' . $term->slug . '-email-filter" id="' . $term->slug . '-email-filter" value="yes" ' . $check . ' />' . $term->name . '</li>';
+								echo '<li><input type="checkbox" name="' . esc_attr( $term->slug ) . '-email-filter" id="' . esc_attr( $term->slug ) . '-email-filter" value="yes" ' . esc_attr( $check ) . ' />' . esc_attr( $term->name ) . '</li>';
 							}
 							?>
 						</ul>
@@ -91,7 +91,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 				</form>
 		<form class="wp-crm-email-form" method="post" action="" enctype="multipart/form-data">
 					<div class="wp-crm-email-group">
-						<label class="wp-crm-email-label"><?php _e( 'Select Recipients', 'wp-crm-system' ); ?></label>
+						<label class="wp-crm-email-label"><?php esc_html_e( 'Select Recipients', 'wp-crm-system' ); ?></label>
 						<div>
 						<?php
 						if ( $filterOrg != '' ) {
@@ -156,13 +156,13 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 										$name = get_the_title( $org->ID );
 										if ( is_email( $emailaddress ) ) {
 											?>
-											<option value="<?php echo $emailaddress; ?>" 
+											<option value="<?php echo esc_html( $emailaddress ); ?>" 
 												<?php
 												if ( in_array( $emailaddress, $to ) ) {
 													echo 'selected="selected"';
 												}
 												?>
-											 ><?php echo $name; ?></option>
+											 ><?php echo esc_attr( $name ); ?></option>
 											<?php
 										}
 									}
@@ -173,7 +173,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 									?>
 									<p class="wp-crm-email-notice wp-crm-email-notice-warning">
 									<?php
-										_e( 'Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.', 'wp-crm-system' );
+										esc_html_e( 'Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.', 'wp-crm-system' );
 									?>
 									</p>
 									<?php
@@ -215,7 +215,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 
 							if ( $contacts ) {
 								?>
-								<select class="wp-crm-email <?php echo $class; ?> wp-crm-email-recipient" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
+								<select class="wp-crm-email <?php echo esc_attr( $class ); ?> wp-crm-email-recipient" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
 									<?php
 									foreach ( $contacts as $contact ) {
 										setup_postdata( $contact );
@@ -228,13 +228,13 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 										// Make sure the contact has an email address so we're not talking to ourselves.
 										if ( is_email( $emailaddress ) ) {
 											?>
-											<option value="<?php echo $emailaddress; ?>"
+											<option value="<?php echo esc_html( $emailaddress ); ?>"
 												<?php
 												if ( in_array( $emailaddress, $to ) ) {
 													echo 'selected="selected"';
 												}
 												?>
-											 ><?php echo $name; ?></option>
+											 ><?php echo esc_attr( $name ); ?></option>
 											<?php
 										}
 									}
@@ -246,7 +246,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 								
 								<p class="wp-crm-email-notice wp-crm-email-notice-warning">
 									<?php
-									_e( 'Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.', 'wp-crm-system' );
+									esc_html_e( 'Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.', 'wp-crm-system' );
 									?>
 								</p>
 								<?php
@@ -256,29 +256,29 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 						</div>
 					</div>
 					<div class="wp-crm-email-group">
-						<label class="wp-crm-email-label"><?php _e( 'From Email Address', 'wp-crm-system' ); ?></label>
+						<label class="wp-crm-email-label"><?php esc_html_e( 'From Email Address', 'wp-crm-system' ); ?></label>
 						<input class="wp-crm-email wp-crm-email-input" type="text" name="wpcrm-email-from-address" id="wpcrm-email-from-address" value="<?php echo esc_attr( $fromemail ); ?>" />
 					</div>
 					<div class="wp-crm-email-group">
-						<label for="wpcrm-email-from-name" class="wp-crm-email-label"><?php _e( 'From Name', 'wp-crm-system' ); ?></label>
+						<label for="wpcrm-email-from-name" class="wp-crm-email-label"><?php esc_html_e( 'From Name', 'wp-crm-system' ); ?></label>
 						<input class="wp-crm-email wp-crm-email-input" type="text" name="wpcrm-email-from-name" id="wpcrm-email-from-name" value="<?php echo esc_attr( $fromname ); ?>"/>
 					</div>
 					<div class="wp-crm-email-group">
-						<label for="wpcrm-email-subject" class="wp-crm-email-label"><?php _e( 'Email Subject', 'wp-crm-system' ); ?></label>
+						<label for="wpcrm-email-subject" class="wp-crm-email-label"><?php esc_html_e( 'Email Subject', 'wp-crm-system' ); ?></label>
 						<input class="wp-crm-email wp-crm-email-input" type="text" name="wpcrm-email-subject" id="wpcrm-email-subject" value="<?php echo esc_attr( $subject ); ?>" />
 					</div>
 					<div class="wp-crm-email-group">
-						<label for="wp-crm-text" class="wp-crm-email-label"><?php _e( 'Email Message', 'wp-crm-system' ); ?></label>
+						<label for="wp-crm-text" class="wp-crm-email-label"><?php esc_html_e( 'Email Message', 'wp-crm-system' ); ?></label>
 						<div id="wp-crm-text" class="wp-crm-email-text-editor">
 							<?php wp_editor( $message, 'wpcrm-email-message', array( 'media_buttons' => false ) ); ?>
 						</div>
 					</div>
 					<div class="wp-crm-email-group">
-						<label for="wpcrm-email-attachment" class="wp-crm-email-label"><?php _e( 'File Attachments', 'wp-crm-system' ); ?></label>
+						<label for="wpcrm-email-attachment" class="wp-crm-email-label"><?php esc_html_e( 'File Attachments', 'wp-crm-system' ); ?></label>
 						<input type="file" id="wpcrm-email-attachment" name="wpcrm-email-attachment[]" multiple="multiple" >
 					</div>
 					<div class="wp-crm-email-group">
-						<input class="button button-primary" type="submit" name="wpcrm_email_send" value="<?php _e( 'Send Email', 'wp-crm-system' ); ?>"/>
+						<input class="button button-primary" type="submit" name="wpcrm_email_send" value="<?php esc_html_e( 'Send Email', 'wp-crm-system' ); ?>"/>
 					</div>
 		</form>
 	</div>
@@ -289,7 +289,7 @@ function wpcrm_send_email() {
 		// All fields are required
 		if ( ! isset( $_POST['wpcrm-email-recipients'] ) || ! isset( $_POST['wpcrm-email-subject'] ) || ! isset( $_POST['wpcrm-email-message'] ) || ! isset( $_POST['wpcrm-email-from-name'] ) || ! isset( $_POST['wpcrm-email-from-address'] ) ) {
 			?>
-			<div class="error"><p><?php _e( 'All fields are required. Please try again.', 'wp-crm-system' ); ?></p></div>
+			<div class="error"><p><?php esc_html_e( 'All fields are required. Please try again.', 'wp-crm-system' ); ?></p></div>
 			<?php
 		} else {
 			// Specific data to send in email.
@@ -350,7 +350,7 @@ function wpcrm_send_email() {
 
 			// Success message
 			?>
-			<div class="updated"><p><?php _e( 'Email sent successfully.', 'wp-crm-system' ); ?></p></div>
+			<div class="updated"><p><?php esc_html_e( 'Email sent successfully.', 'wp-crm-system' ); ?></p></div>
 			<?php
 			return;
 		}

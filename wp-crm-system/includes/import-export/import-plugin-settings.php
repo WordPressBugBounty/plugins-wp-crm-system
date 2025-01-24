@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'admin_init', 'wp_crm_system_process_settings_import' );
 function wp_crm_system_process_settings_import() {
 	if( isset( $_GET['message'] ) && 'import-successful' == $_GET['message'] ){
-		echo '<div id="message" class="updated"><p><strong>'. __( 'Import Successful!', 'wp-crm-system' ) . '</strong></p></div>';
+		echo '<div id="message" class="updated"><p><strong>'. esc_html__( 'Import Successful!', 'wp-crm-system' ) . '</strong></p></div>';
 	}
 	if( empty( $_POST['wp_crm_system_action'] ) || 'import_settings' != $_POST['wp_crm_system_action'] )
 		return;
@@ -15,11 +15,11 @@ function wp_crm_system_process_settings_import() {
 		return;
 	$extension = end( explode( '.', $_FILES['import_file']['name'] ) );
 	if( $extension != 'json' ) {
-		wp_die( __( 'Please upload a valid .json file' ) );
+		wp_die( esc_html__( 'Please upload a valid .json file' ) );
 	}
 	$import_file = $_FILES['import_file']['tmp_name'];
 	if( empty( $import_file ) ) {
-		wp_die( __( 'Please upload a file to import' ) );
+		wp_die( esc_html__( 'Please upload a file to import' ) );
 	}
 	// Retrieve the settings from the file and convert the json object to an array.
 	$settings = (array) json_decode( file_get_contents( $import_file ) );
@@ -35,9 +35,9 @@ function wp_crm_system_import_settings_field(){
 	<div class="postbox">
 		<div class="inside">
 			<header>
-				<h3><span><?php _e( 'Import Settings', 'wp-crm-system' ); ?></span></h3>
+				<h3><span><?php esc_html_e( 'Import Settings', 'wp-crm-system' ); ?></span></h3>
 			</header>
-			<p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-crm-system' ); ?></p>
+			<p><?php esc_html_e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-crm-system' ); ?></p>
 			<form method="post" enctype="multipart/form-data">
 				<p>
 					<input type="file" name="import_file"/>

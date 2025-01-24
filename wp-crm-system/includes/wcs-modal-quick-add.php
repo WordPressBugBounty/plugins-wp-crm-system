@@ -27,54 +27,54 @@ function wcs_modal_quick_add() {
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close">&times;</span>
-			<h2><?php _e( 'Add Organization', 'wp-crm-system' ); ?></h2>
+			<h2><?php esc_html_e( 'Add Organization', 'wp-crm-system' ); ?></h2>
 		</div>
 		<div class="modal-body">
 			<p class="message"></p>
 			<form action="" class="quick-add" id="wcs-form-organization">
 			<input name="wcs-post-type" value="organization" type="hidden">
-			<p class="wcs-required"><?php _e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
+			<p class="wcs-required"><?php esc_html_e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
 			<p>
-				<label for="name"><?php _e( 'Name: ', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="name"><?php esc_html_e( 'Name: ', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="name" name="name" type="text">
 			</p>
 			<p>
-				<label for="phone"><?php _e( 'Phone: ', 'wp-crm-system' ); ?></label>
+				<label for="phone"><?php esc_html_e( 'Phone: ', 'wp-crm-system' ); ?></label>
 				<input id="phone" name="phone" type="tel">
 			</p>
 			<p>
-				<label for="email"><?php _e( 'Email: ', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="email"><?php esc_html_e( 'Email: ', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="email" name="email" type="email">
 			</p>
 			<p>
-				<label for="website"><?php _e( 'Website: ', 'wp-crm-system' ); ?></label>
+				<label for="website"><?php esc_html_e( 'Website: ', 'wp-crm-system' ); ?></label>
 				<input id="website" name="website" type="url">
 			</p>
 			<p>
-				<label for="address_1"><?php _e( 'Address 1: ', 'wp-crm-system' ); ?></label>
+				<label for="address_1"><?php esc_html_e( 'Address 1: ', 'wp-crm-system' ); ?></label>
 				<input id="address_1" name="address1" type="text">
 			</p>
 			<p>
-				<label for="address_2"><?php _e( 'Address 2: ', 'wp-crm-system' ); ?></label>
+				<label for="address_2"><?php esc_html_e( 'Address 2: ', 'wp-crm-system' ); ?></label>
 				<input id="address_2" name="address2" type="text">
 			</p>
 			<p>
-				<label for="city"><?php _e( 'City: ', 'wp-crm-system' ); ?></label>
+				<label for="city"><?php esc_html_e( 'City: ', 'wp-crm-system' ); ?></label>
 				<input id="city" name="city" type="text">
 			</p>
 			<p>
-				<label for="state"><?php _e( 'State/Province: ', 'wp-crm-system' ); ?></label>
+				<label for="state"><?php esc_html_e( 'State/Province: ', 'wp-crm-system' ); ?></label>
 				<input id="state" name="state" type="text">
 			</p>
 			<p>
-				<label for="postal"><?php _e( 'Postal Code: ', 'wp-crm-system' ); ?></label>
+				<label for="postal"><?php esc_html_e( 'Postal Code: ', 'wp-crm-system' ); ?></label>
 				<input id="postal" name="postal" type="text">
 			</p>
 			<p>
-				<label for="country"><?php _e( 'Country: ', 'wp-crm-system' ); ?></label>
+				<label for="country"><?php esc_html_e( 'Country: ', 'wp-crm-system' ); ?></label>
 				<input id="country" name="country" type="text">
 			</p>
-			<p><input type="submit" class="button button-primary wcs-modal-submit organization" value="<?php _e( 'Add', 'wp-crm-system' ); ?>"></p>
+			<p><input type="submit" class="button button-primary wcs-modal-submit organization" value="<?php esc_html_e( 'Add', 'wp-crm-system' ); ?>"></p>
 			</form>
 		</div>
 	</div>
@@ -83,15 +83,15 @@ function wcs_modal_quick_add() {
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close">&times;</span>
-			<h2><?php _e( 'Add Contact', 'wp-crm-system' ); ?></h2>
+			<h2><?php esc_html_e( 'Add Contact', 'wp-crm-system' ); ?></h2>
 		</div>
 		<div class="modal-body">
 			<p class="message"></p>
 			<form action="" class="quick-add" id="wcs-form-contact">
 			<input name="wcs-post-type" value="contact" type="hidden">
-			<p class="wcs-required"><?php _e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
+			<p class="wcs-required"><?php esc_html_e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
 			<p>
-				<label for="name_prefix"><?php _e( 'Name Prefix: ', 'wp-crm-system' ); ?></label>
+				<label for="name_prefix"><?php esc_html_e( 'Name Prefix: ', 'wp-crm-system' ); ?></label>
 				<select id="name_prefix" name="name_prefix">
 				<?php
 				$args = array(
@@ -127,57 +127,57 @@ function wcs_modal_quick_add() {
 				 */
 				ob_start();
 				foreach ( $args as $key => $value ) {
-					printf( '<option value="%s">%s</option>', sanitize_text_field( $key ), sanitize_text_field( $value ) );
+					printf( '<option value="%s">%s</option>', esc_attr( $key ), esc_attr( $value ) );
 				}
 				ob_flush();
 				?>
 				</select>
 			</p>
 			<p>
-				<label for="first_name"><?php _e( 'First Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="first_name"><?php esc_html_e( 'First Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="first_name" name="first_name" type="text">
 			</p>
 			<p>
-				<label for="last_name"><?php _e( 'Last Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="last_name"><?php esc_html_e( 'Last Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="last_name" name="last_name" type="text">
 			</p>
 			<p>
-				<label for="email"><?php _e( 'Email:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="email"><?php esc_html_e( 'Email:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="email" name="email" type="email">
 			</p>
 			<p>
-				<label for="phone"><?php _e( 'Phone: ', 'wp-crm-system' ); ?></label>
+				<label for="phone"><?php esc_html_e( 'Phone: ', 'wp-crm-system' ); ?></label>
 				<input id="phone" name="phone" type="url">
 			</p>
 			<p>
-				<label for="website"><?php _e( 'Website: ', 'wp-crm-system' ); ?></label>
+				<label for="website"><?php esc_html_e( 'Website: ', 'wp-crm-system' ); ?></label>
 				<input id="website" name="website" type="url">
 			</p>
 			<p>
-				<label for="address_1"><?php _e( 'Address 1: ', 'wp-crm-system' ); ?></label>
+				<label for="address_1"><?php esc_html_e( 'Address 1: ', 'wp-crm-system' ); ?></label>
 				<input id="address_1" name="address1" type="text">
 			</p>
 			<p>
-				<label for="address_2"><?php _e( 'Address 2: ', 'wp-crm-system' ); ?></label>
+				<label for="address_2"><?php esc_html_e( 'Address 2: ', 'wp-crm-system' ); ?></label>
 				<input id="address_2" name="address2" type="text">
 			</p>
 			<p>
-				<label for="city"><?php _e( 'City: ', 'wp-crm-system' ); ?></label>
+				<label for="city"><?php esc_html_e( 'City: ', 'wp-crm-system' ); ?></label>
 				<input id="city" name="city" type="text">
 			</p>
 			<p>
-				<label for="state"><?php _e( 'State/Province: ', 'wp-crm-system' ); ?></label>
+				<label for="state"><?php esc_html_e( 'State/Province: ', 'wp-crm-system' ); ?></label>
 				<input id="state" name="state" type="text">
 			</p>
 			<p>
-				<label for="postal"><?php _e( 'Postal Code: ', 'wp-crm-system' ); ?></label>
+				<label for="postal"><?php esc_html_e( 'Postal Code: ', 'wp-crm-system' ); ?></label>
 				<input id="postal" name="postal" type="text">
 			</p>
 			<p>
-				<label for="country"><?php _e( 'Country: ', 'wp-crm-system' ); ?></label>
+				<label for="country"><?php esc_html_e( 'Country: ', 'wp-crm-system' ); ?></label>
 				<input id="country" name="country" type="text">
 			</p>
-			<p><input type="submit" class="button button-primary wcs-modal-submit contact" value="<?php _e( 'Add', 'wp-crm-system' ); ?>"></p>
+			<p><input type="submit" class="button button-primary wcs-modal-submit contact" value="<?php esc_html_e( 'Add', 'wp-crm-system' ); ?>"></p>
 			</form>
 		</div>
 	</div>
@@ -186,27 +186,27 @@ function wcs_modal_quick_add() {
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close">&times;</span>
-			<h2><?php _e( 'Add Project', 'wp-crm-system' ); ?></h2>
+			<h2><?php esc_html_e( 'Add Project', 'wp-crm-system' ); ?></h2>
 		</div>
 		<div class="modal-body">
 			<p class="message"></p>
 			<form action="" class="quick-add" id="wcs-form-project">
 			<input name="wcs-post-type" value="project" type="hidden">
-			<p class="wcs-required"><?php _e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
+			<p class="wcs-required"><?php esc_html_e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
 			<p>
-				<label for="name"><?php _e( 'Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="name"><?php esc_html_e( 'Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="name" name="name" type="text">
 			</p>
 			<p>
-				<label for="value"><?php _e( 'Value:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="value"><?php esc_html_e( 'Value:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="value" name="value" type="text">
 			</p>
 			<p>
-				<label for="close_date"><?php _e( 'Close Date: ', 'wp-crm-system' ); ?></label>
+				<label for="close_date"><?php esc_html_e( 'Close Date: ', 'wp-crm-system' ); ?></label>
 				<input id="close_date" name="close_date" type="text" class="datepicker">
 			</p>
 			<p>
-				<label for="status"><?php _e( 'Status: ', 'wp-crm-system' ); ?></label>
+				<label for="status"><?php esc_html_e( 'Status: ', 'wp-crm-system' ); ?></label>
 				<select id="status" name="status">
 				<?php
 				$args = array(
@@ -227,14 +227,14 @@ function wcs_modal_quick_add() {
 				 */
 				ob_start();
 				foreach ( $args as $key => $value ) {
-					printf( '<option value="%s">%s</option>', sanitize_text_field( $key ), sanitize_text_field( $value ) );
+					printf( '<option value="%s">%s</option>', esc_attr( $key ), esc_attr( $value ) );
 				}
 				ob_flush();
 				?>
 				</select>
 			</p>
 			<p>
-				<label for="progress"><?php _e( 'Progress: ', 'wp-crm-system' ); ?></label>
+				<label for="progress"><?php esc_html_e( 'Progress: ', 'wp-crm-system' ); ?></label>
 				<select id="progress" name="progress">
 				<?php
 				$args = array(
@@ -271,14 +271,14 @@ function wcs_modal_quick_add() {
 				 */
 				ob_start();
 				foreach ( $args as $key => $value ) {
-					printf( '<option value="%s">%s&#37;</option>', sanitize_text_field( $key ), sanitize_text_field( $value ) );
+					printf( '<option value="%s">%s&#37;</option>', esc_attr( $key ), esc_attr( $value ) );
 				}
 				ob_flush();
 				?>
 				</select>
 			</p>
 			<p>
-				<label for="description"><?php _e( 'Description: ', 'wp-crm-system' ); ?></label>
+				<label for="description"><?php esc_html_e( 'Description: ', 'wp-crm-system' ); ?></label>
 				<?php
 				/**
 				 * We use output buffering to avoid "header already sent" issue
@@ -298,7 +298,7 @@ function wcs_modal_quick_add() {
 				ob_flush();
 				?>
 			</p>
-			<p><input type="submit" class="button button-primary wcs-modal-submit project" value="<?php _e( 'Add', 'wp-crm-system' ); ?>"></p>
+			<p><input type="submit" class="button button-primary wcs-modal-submit project" value="<?php esc_html_e( 'Add', 'wp-crm-system' ); ?>"></p>
 			</form>
 		</div>
 	</div>
@@ -307,19 +307,19 @@ function wcs_modal_quick_add() {
 	<div class="modal-content">
 		<div class="modal-header">
 			<span class="close">&times;</span>
-			<h2><?php _e( 'Add Campaign', 'wp-crm-system' ); ?></h2>
+			<h2><?php esc_html_e( 'Add Campaign', 'wp-crm-system' ); ?></h2>
 		</div>
 		<div class="modal-body">
 			<p class="message"></p>
 			<form action="" class="quick-add" id="wcs-form-campaign">
 			<input name="wcs-post-type" value="campaign" type="hidden">
-			<p class="wcs-required"><?php _e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
+			<p class="wcs-required"><?php esc_html_e( 'Fields with (*) are required!', 'wp-crm-system' ); ?></p>
 			<p>
-				<label for="name"><?php _e( 'Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="name"><?php esc_html_e( 'Name:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="name" name="name" type="text">
 			</p>
 			<p>
-				<label for="assign_to"><?php _e( 'Assign To: ', 'wp-crm-system' ); ?></label>
+				<label for="assign_to"><?php esc_html_e( 'Assign To: ', 'wp-crm-system' ); ?></label>
 				<select id="assign_to" name="assign_to">
 				<?php
 				$users        = get_users();
@@ -336,16 +336,16 @@ function wcs_modal_quick_add() {
 				 * @since   3.2.5
 				 */
 				ob_start();
-				printf( '<option value="%s">%s</option>', '', __( 'Not Assigned', 'wp-crm-system' ) );
+				printf( '<option value="%s">%s</option>', '', esc_html__( 'Not Assigned', 'wp-crm-system' ) );
 				foreach ( $wp_crm_users as $key => $value ) {
-					printf( '<option value="%s">%s</option>', sanitize_text_field( $value ), sanitize_text_field( $value ) );
+					printf( '<option value="%s">%s</option>', esc_attr( $value ), esc_attr( $value ) );
 				}
 				ob_flush();
 				?>
 				</select>
 			</p>
 			<p>
-				<label for="status"><?php _e( 'Status: ', 'wp-crm-system' ); ?></label>
+				<label for="status"><?php esc_html_e( 'Status: ', 'wp-crm-system' ); ?></label>
 				<select id="status" name="status">
 				<?php
 				$args = array(
@@ -366,38 +366,38 @@ function wcs_modal_quick_add() {
 				 */
 				ob_start();
 				foreach ( $args as $key => $value ) {
-					printf( '<option value="%s">%s</option>', sanitize_text_field( $key ), sanitize_text_field( $value ) );
+					printf( '<option value="%s">%s</option>', esc_attr( $key ), esc_attr( $value ) );
 				}
 				ob_flush();
 				?>
 				</select>
 			</p>
 			<p>
-				<label for="start_date"><?php _e( 'Start Date: ', 'wp-crm-system' ); ?></label>
+				<label for="start_date"><?php esc_html_e( 'Start Date: ', 'wp-crm-system' ); ?></label>
 				<input id="start_date" name="start_date" type="text" class="datepicker">
 			</p>
 			<p>
-				<label for="end_date"><?php _e( 'End Date: ', 'wp-crm-system' ); ?></label>
+				<label for="end_date"><?php esc_html_e( 'End Date: ', 'wp-crm-system' ); ?></label>
 				<input id="end_date" name="end_date" type="text" class="datepicker">
 			</p>
 			<p>
-				<label for="projected_reach"><?php _e( 'Projected Reach: ', 'wp-crm-system' ); ?></label>
+				<label for="projected_reach"><?php esc_html_e( 'Projected Reach: ', 'wp-crm-system' ); ?></label>
 				<input id="projected_reach" name="projected_reach" type="number">
 			</p>
 			<p>
-				<label for="total_responses"><?php _e( 'Total Responses: ', 'wp-crm-system' ); ?></label>
+				<label for="total_responses"><?php esc_html_e( 'Total Responses: ', 'wp-crm-system' ); ?></label>
 				<input id="total_responses" name="total_responses" type="number">
 			</p>
 			<p>
-				<label for="budgeted_cost"><?php _e( 'Budgeted Cost:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="budgeted_cost"><?php esc_html_e( 'Budgeted Cost:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="budgeted_cost" name="budgeted_cost" type="number">
 			</p>
 			<p>
-				<label for="actual_cost"><?php _e( 'Actual Cost:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
+				<label for="actual_cost"><?php esc_html_e( 'Actual Cost:', 'wp-crm-system' ); ?><span class="wcs-required"> *</span></label>
 				<input id="actual_cost" name="actual_cost" type="number">
 			</p>
 			<p>
-				<label for="campaign_description"><?php _e( 'Description: ', 'wp-crm-system' ); ?></label>
+				<label for="campaign_description"><?php esc_html_e( 'Description: ', 'wp-crm-system' ); ?></label>
 				<?php
 				/**
 				 * We use output buffering to avoid "header already sent" issue
@@ -417,7 +417,7 @@ function wcs_modal_quick_add() {
 				ob_flush();
 				?>
 			</p>
-			<p><input type="submit" class="button button-primary wcs-modal-submit campaign" value="<?php _e( 'Add', 'wp-crm-system' ); ?>"></p>
+			<p><input type="submit" class="button button-primary wcs-modal-submit campaign" value="<?php esc_html_e( 'Add', 'wp-crm-system' ); ?>"></p>
 			</form>
 		</div>
 	</div>

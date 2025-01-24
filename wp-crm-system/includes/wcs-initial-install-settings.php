@@ -10,7 +10,7 @@ function wpcrm_system_initial_settings_notice__warning() {
 		$link = sprintf( wp_kses( __( 'Please visit the <a href="%s">WP-CRM System Dashboard Settings Tab</a> to set your options and complete set up.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
 	?>
 		<div class="notice notice-warning">
-			<p><?php echo $link; ?></p>
+			<p><?php echo wp_kses_post( $link ); ?></p>
 		</div>
 <?php	}
 }

@@ -99,7 +99,7 @@ if ( $user->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
 							$opt_out .= 'selected="selected"';
 						}
 					$opt_out .= '>' . esc_attr( $result->name ) . '</option>';
-					echo $opt_out;
+					echo wp_kses_post( $opt_out );
 				}
 				?>
 			</select>
@@ -112,7 +112,7 @@ if ( $user->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
 			 * @since 3.2.3.2
 			 * @package wp-crm-system
 			 */
-			echo '<input type="hidden" name="wp-crm-system-tax-name" value="' . $tax . '"/>';
+			echo '<input type="hidden" name="wp-crm-system-tax-name" value="' . esc_attr( $tax ) . '"/>';
 		} else {
 			esc_attr_e( 'No types to display', 'wp-crm-system' );
 		}

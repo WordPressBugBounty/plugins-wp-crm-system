@@ -207,14 +207,14 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $value ) ) {
-				_e( 'No', 'wp-crm-system' );
+				esc_html_e( 'No', 'wp-crm-system' );
 			}
 
 			/* If there is a start date, display it in the set date format. */
 			elseif ( 'yes' == $value ) {
-				_e( 'Yes', 'wp-crm-system' );
+				esc_html_e( 'Yes', 'wp-crm-system' );
 			} else {
-				_e( 'No', 'wp-crm-system' );
+				esc_html_e( 'No', 'wp-crm-system' );
 			}
 
 			break;
@@ -225,12 +225,12 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $value ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a start date, display it in the set date format. */
 			else {
-				echo $currency_symbol . esc_html( $value );
+				echo esc_html( $currency_symbol . $value );
 			}
 
 			break;
@@ -241,12 +241,12 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $value ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a start date, display it in the set date format. */
 			else {
-				echo $currency_symbol . esc_html( $value );
+				echo esc_html( $currency_symbol . $value );
 			}
 
 			break;
@@ -257,12 +257,12 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $date ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a start date, display it in the set date format. */
 			else {
-				echo date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $date ) );
+				echo esc_html( date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $date ) ) );
 			}
 
 			break;
@@ -273,12 +273,12 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $date ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a start date, display it in the set date format. */
 			else {
-				echo date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $date ) );
+				echo esc_html( date( get_option( 'wpcrm_system_php_date_format' ), esc_html( $date ) ) );
 			}
 
 			break;
@@ -289,7 +289,7 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $reach ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a reach, display it. */
@@ -305,7 +305,7 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $responses ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there are responses, display it. */
@@ -328,7 +328,7 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $status ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html__( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a status, display it. */

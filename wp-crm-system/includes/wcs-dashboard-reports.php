@@ -16,7 +16,7 @@ function wpcrm_system_dashboard_calendar(){ ?>
 				$month 	= date( 'n' );
 				$year 	= date( 'Y' );
 			}
-			echo wpcrm_system_display_calendar( 'all', $month, $year );
+			echo wp_kses_post( wpcrm_system_display_calendar( 'all', $month, $year ) );
 		?>
 	</div>
 	<?php
@@ -25,7 +25,7 @@ function wpcrm_system_dashboard_calendar(){ ?>
 
 function wpcrm_system_dashboard_contacts_box(){ ?>
 	<div class="wpcrm-dashboard wpcrm-dashboard-form-wrapper">
-		<h3><?php _e( 'Address Book', 'wp-crm-system' ); ?></h3>
+		<h3><?php esc_html_e( 'Address Book', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -37,18 +37,18 @@ function wpcrm_system_dashboard_contacts_box(){ ?>
 			if ($posts) { ?>
 				<form id="address-book-form" action="" method="POST">
 					<select id="dashboard-address-book" class="wp-crm-system-searchable" name="address_book_entry">
-						<option value=""><?php _e( 'Select a Contact', 'wp-crm-system' ); ?></option>
+						<option value=""><?php esc_html_e( 'Select a Contact', 'wp-crm-system' ); ?></option>
 						<?php
 						foreach($posts as $post) {
-							echo '<option value="' . $post->ID . '">' . get_the_title( $post->ID ) . '</option>';
+							echo '<option value="' . esc_attr( $post->ID ) . '">' . esc_html( get_the_title( $post->ID ) ) . '</option>';
 						} ?>
 					</select>
-					<img src="<?php echo admin_url('/images/wpspin_light.gif'); ?>" class="waiting" id="address_book_loading" style="display:none;"/>
+					<img src="<?php echo esc_url( admin_url('/images/wpspin_light.gif') ); ?>" class="waiting" id="address_book_loading" style="display:none;"/>
 				</form>
 				<div id="address_book_results"></div>
 				<?php
 			} else {
-				_e( 'No contacts to display', 'wp-crm-system' );
+				esc_html_e( 'No contacts to display', 'wp-crm-system' );
 			}
 		} ?>
 	</div>
@@ -56,7 +56,7 @@ function wpcrm_system_dashboard_contacts_box(){ ?>
 }
 function wpcrm_system_dashboard_projects_box() { ?>
 	<div class="wpcrm-dashboard wpcrm-dashboard-form-wrapper">
-		<h3><?php _e( 'Projects', 'wp-crm-system' ); ?></h3>
+		<h3><?php esc_html_e( 'Projects', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -68,18 +68,18 @@ function wpcrm_system_dashboard_projects_box() { ?>
 			if ($posts) { ?>
 				<form id="project-list-form" action="" method="POST">
 					<select id="dashboard-project-list" class="wp-crm-system-searchable" name="project_list_entry">
-						<option value=""><?php _e( 'Select a Project', 'wp-crm-system' ); ?></option>
+						<option value=""><?php esc_html_e( 'Select a Project', 'wp-crm-system' ); ?></option>
 						<?php
 						foreach($posts as $post) {
-							echo '<option value="' . $post->ID . '">' . get_the_title( $post->ID ) . '</option>';
+							echo '<option value="' . esc_attr( $post->ID ) . '">' . esc_html( get_the_title( $post->ID ) ) . '</option>';
 						} ?>
 					</select>
-					<img src="<?php echo admin_url('/images/wpspin_light.gif'); ?>" class="waiting" id="project_list_loading" style="display:none;"/>
+					<img src="<?php echo esc_url( admin_url('/images/wpspin_light.gif') ); ?>" class="waiting" id="project_list_loading" style="display:none;"/>
 				</form>
 				<div id="project_list_results"></div>
 				<?php
 			} else {
-				_e( 'No projects to display', 'wp-crm-system' );
+				esc_html_e( 'No projects to display', 'wp-crm-system' );
 			}
 		} ?>
 	</div>
@@ -88,7 +88,7 @@ function wpcrm_system_dashboard_projects_box() { ?>
 
 function wpcrm_system_dashboard_tasks_box() { ?>
 	<div class="wpcrm-dashboard wpcrm-dashboard-form-wrapper">
-		<h3><?php _e( 'Tasks', 'wp-crm-system' ); ?></h3>
+		<h3><?php esc_html_e( 'Tasks', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -100,18 +100,18 @@ function wpcrm_system_dashboard_tasks_box() { ?>
 			if ($posts) { ?>
 				<form id="task-list-form" action="" method="POST">
 					<select id="dashboard-task-list" class="wp-crm-system-searchable" name="task_list_entry">
-						<option value=""><?php _e( 'Select a Task', 'wp-crm-system' ); ?></option>
+						<option value=""><?php esc_html_e( 'Select a Task', 'wp-crm-system' ); ?></option>
 						<?php
 						foreach($posts as $post) {
-							echo '<option value="' . $post->ID . '">' . get_the_title( $post->ID ) . '</option>';
+							echo '<option value="' . esc_attr( $post->ID ) . '">' . esc_html( get_the_title( $post->ID ) ) . '</option>';
 						} ?>
 					</select>
-					<img src="<?php echo admin_url('/images/wpspin_light.gif'); ?>" class="waiting" id="task_list_loading" style="display:none;"/>
+					<img src="<?php echo esc_url( admin_url('/images/wpspin_light.gif') ); ?>" class="waiting" id="task_list_loading" style="display:none;"/>
 				</form>
 				<div id="task_list_results"></div>
 				<?php
 			} else {
-				_e( 'No tasks to display', 'wp-crm-system' );
+				esc_html_e( 'No tasks to display', 'wp-crm-system' );
 			}
 		} ?>
 	</div>
@@ -120,7 +120,7 @@ function wpcrm_system_dashboard_tasks_box() { ?>
 
 function wpcrm_system_dashboard_opportunities_box() { ?>
 	<div class="wpcrm-dashboard wpcrm-dashboard-form-wrapper">
-		<h3><?php _e( 'Opportunities', 'wp-crm-system' ); ?></h3>
+		<h3><?php esc_html_e( 'Opportunities', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -132,18 +132,18 @@ function wpcrm_system_dashboard_opportunities_box() { ?>
 			if ($posts) { ?>
 				<form id="opportunity-list-form" action="" method="POST">
 					<select id="dashboard-opportunity-list" class="wp-crm-system-searchable" name="opportunity_list_entry">
-						<option value=""><?php _e( 'Select an Opportunity', 'wp-crm-system' ); ?></option>
+						<option value=""><?php esc_html_e( 'Select an Opportunity', 'wp-crm-system' ); ?></option>
 						<?php
 						foreach($posts as $post) {
-							echo '<option value="' . $post->ID . '">' . get_the_title( $post->ID ) . '</option>';
+							echo '<option value="' . esc_attr( $post->ID ) . '">' . esc_html( get_the_title( $post->ID ) ) . '</option>';
 						} ?>
 					</select>
-					<img src="<?php echo admin_url('/images/wpspin_light.gif'); ?>" class="waiting" id="opportunity_list_loading" style="display:none;"/>
+					<img src="<?php echo esc_url( admin_url('/images/wpspin_light.gif') ); ?>" class="waiting" id="opportunity_list_loading" style="display:none;"/>
 				</form>
 				<div id="opportunity_list_results"></div>
 				<?php
 			} else {
-				_e( 'No opportunities to display', 'wp-crm-system' );
+				esc_html_e( 'No opportunities to display', 'wp-crm-system' );
 			}
 		} ?>
 	</div>
@@ -184,15 +184,15 @@ function wpcrm_system_show_extensions() {
 
 function wpcrm_system_dashboard_extensions_box() { ?>
 	<div class="wpcrm-dashboard">
-		<h2><?php _e('Extensions', 'wp-crm-system'); ?></h2>
+		<h2><?php esc_html_e('Extensions', 'wp-crm-system'); ?></h2>
 		<?php
-			echo wpcrm_system_show_extensions();
+			echo wp_kses_post( wpcrm_system_show_extensions() );
 		?>
 		<div class="wp-crm-first">
 		<?php
 			$url = admin_url( 'admin.php?page=wpcrm-extensions' );
 			$link = sprintf( wp_kses( __( 'Take a look at our <a href="%s">extensions</a> to see how you can get more out of WP-CRM System.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
-			echo '<hr /><strong>' . $link . '</strong>';
+			echo '<hr /><strong>' . wp_kses_post( $link ) . '</strong>';
 		?>
 		</div>
 	</div>

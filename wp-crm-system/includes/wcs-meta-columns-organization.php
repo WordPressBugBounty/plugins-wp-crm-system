@@ -36,14 +36,14 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $number ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a phone number, display it with clickable link. */
 			} else {
 				if ( $display_links ) {
-					echo '<a href="tel:' . $number . '">' . $number . '</a>';
+					echo '<a href="tel:' . esc_attr( $number ) . '">' . esc_attr( $number ) . '</a>';
 				} else {
-					echo $number;
+					echo esc_attr( $number );
 				}
 			}
 
@@ -56,15 +56,15 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $email ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a email, display it. */
 			} else {
 				$email = esc_html( $email );
 				if ( $display_links ) {
-					echo '<a href="mailto:' . $email . '">' . $email . '</a>';
+					echo '<a href="mailto:' . esc_html( $email ) . '">' . esc_html( $email ) . '</a>';
 				} else {
-					echo $email;
+					echo esc_html( $email );
 				}
 			}
 			break;
@@ -87,7 +87,7 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $address1 ) && empty( $address2 ) && empty( $city ) && empty( $state ) && empty( $postal ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is an address field set, display it. */
 			else
@@ -98,7 +98,7 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 		case 'contacts' :
 
 			/* Get the post meta. */
-			echo wpcrmListContactsinOrg();
+			echo wp_kses_post( wpcrmListContactsinOrg() );
 
 			break;
 		/* If displaying the 'category' column */

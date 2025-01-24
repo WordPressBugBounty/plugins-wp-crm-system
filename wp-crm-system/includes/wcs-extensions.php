@@ -2,8 +2,8 @@
 $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'overview';
 ?>
 <h2 class="nav-tab-wrapper">
-	<a class="nav-tab <?php echo $active_tab == 'overview' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=overview"><?php _e( 'Overview', 'wp-crm-system' ) ?></a>
-	<a class="nav-tab <?php echo $active_tab == 'plans' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=plans"><?php _e( 'Plans', 'wp-crm-system' ) ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'overview' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=overview"><?php esc_html_e( 'Overview', 'wp-crm-system' ) ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'plans' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=plans"><?php esc_html_e( 'Plans', 'wp-crm-system' ) ?></a>
 </h2>
 <?php
 if ( !class_exists('wpCRMSystemExtensions') ) {
@@ -176,17 +176,17 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 		function wp_crm_system_extensions_overview() {  ?>
 			<div class="wrap">
 				<div>
-					<h2><?php _e( 'WP-CRM System Extensions', 'wp-crm-system' ); ?></h2>
-					<p><?php _e( 'These extensions add features to your WP-CRM System', 'wp-crm-system' ); ?></p>
+					<h2><?php esc_html_e( 'WP-CRM System Extensions', 'wp-crm-system' ); ?></h2>
+					<p><?php esc_html_e( 'These extensions add features to your WP-CRM System', 'wp-crm-system' ); ?></p>
 					<?php foreach( $this->extensions as $extension ) { ?>
 						<div class="wpcrm-extension">
-							<h3 class="wpcrm-extension-title"><?php echo $extension['title']; ?></h3>
-							<a href="<?php echo $extension['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $extension['img']; ?>" alt="<?php echo $extension['title']; ?>" /></a>
-							<p><?php echo $extension['desc']; ?></p>
+							<h3 class="wpcrm-extension-title"><?php echo esc_attr( $extension['title'] ); ?></h3>
+							<a href="<?php echo esc_url( $extension['title'] ); ?>"><img width="300px" height="145px" src="<?php echo esc_url( WP_CRM_SYSTEM_PLUGIN_URL ) . '/includes/images/' . esc_attr( $extension['img'] ); ?>" alt="<?php echo esc_attr( $extension['title'] ); ?>" /></a>
+							<p><?php echo wp_kses_post( $extension['desc'] ); ?></p>
 							<?php if( defined( $extension['class'] ) ) { ?>
-								<a href="" class="button-secondary disabled"><?php _e( 'Extension Installed', 'wp-crm-system' ); ?></a>
+								<a href="" class="button-secondary disabled"><?php esc_html_e( 'Extension Installed', 'wp-crm-system' ); ?></a>
 							<?php } else { ?>
-								<a href="<?php echo $extension['url']; ?>?utm_source=plugin-addons-page&utm_medium=plugin&utm_campaign=WPCRMSystemAddonsPage&utm_content=<?php echo urlencode( $extension['title'] ); ?>" class="button-secondary"><?php _e( 'Get This Extension','wp-crm-system' ); ?></a>
+								<a href="<?php echo esc_url( $extension['title'] ); ?>?utm_source=plugin-addons-page&utm_medium=plugin&utm_campaign=WPCRMSystemAddonsPage&utm_content=<?php echo urlencode( esc_attr( $extension['title'] ) ); ?>" class="button-secondary"><?php esc_html_e( 'Get This Extension','wp-crm-system' ); ?></a>
 							<?php } ?>
 						</div>
 					<?php } ?>
@@ -196,14 +196,14 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 		function wp_crm_system_plans_overview() {  ?>
 			<div class="wrap">
 				<div>
-					<h2><?php _e( 'WP-CRM System Plans', 'wp-crm-system' ); ?></h2>
-					<p><?php _e( 'Save money with these bundled plans of WP-CRM System extensions', 'wp-crm-system' ); ?></p>
+					<h2><?php esc_html_e( 'WP-CRM System Plans', 'wp-crm-system' ); ?></h2>
+					<p><?php esc_html_e( 'Save money with these bundled plans of WP-CRM System extensions', 'wp-crm-system' ); ?></p>
 					<?php foreach( $this->plans as $plan ) { ?>
 						<div class="wpcrm-extension">
-							<h3 class="wpcrm-extension-title"><?php echo $plan['title']; ?></h3>
-							<a href="<?php echo $plan['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $plan['img']; ?>" alt="<?php echo $plan['title']; ?>" /></a>
-							<p><?php echo $plan['desc']; ?></p>
-								<a href="<?php echo $plan['url']; ?>?utm_source=plugin-addons-page&utm_medium=plugin&utm_campaign=WPCRMSystemAddonsPage&utm_content=<?php echo urlencode( $plan['title'] ); ?>" class="button-secondary"><?php _e( 'Get This Plan','wp-crm-system' ); ?></a>
+							<h3 class="wpcrm-extension-title"><?php echo esc_attr( $plan['title'] ); ?></h3>
+							<a href="<?php echo esc_url( $plan['url'] ); ?>"><img width="300px" height="145px" src="<?php echo esc_url( WP_CRM_SYSTEM_PLUGIN_URL ) . '/includes/images/' . esc_attr( $plan['img'] ); ?>" alt="<?php echo wp_kses_post( $plan['title'] ); ?>" /></a>
+							<p><?php echo wp_kses_post( $plan['desc'] ); ?></p>
+								<a href="<?php echo esc_url( $plan['url'] ); ?>?utm_source=plugin-addons-page&utm_medium=plugin&utm_campaign=WPCRMSystemAddonsPage&utm_content=<?php echo urlencode( esc_attr( $plan['title'] ) ); ?>" class="button-secondary"><?php esc_html_e( 'Get This Plan','wp-crm-system' ); ?></a>
 						</div>
 					<?php } ?>
 				</div>

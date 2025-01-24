@@ -93,7 +93,7 @@ class WPCRM_System_Export{
 		$cols = $this->get_csv_cols();
 		$i = 1;
 		foreach( $cols as $col_id => $column ) {
-			echo '"' . addslashes( $column ) . '"';
+			echo '"' . wp_kses_post( addslashes( $column ) ) . '"';
 			echo $i == count( $cols ) ? '' : ',';
 			$i++;
 		}
@@ -172,7 +172,7 @@ class WPCRM_System_Export{
 	 */
 	public function export() {
 		if ( ! $this->can_export() )
-			wp_die( __( 'You do not have permission to export data.', 'wp-crm-system' ), __( 'Error', 'wp-crm-system' ), array( 'response' => 403 ) );
+			wp_die( esc_html__( 'You do not have permission to export data.', 'wp-crm-system' ), esc_html__( 'Error', 'wp-crm-system' ), array( 'response' => 403 ) );
 
 		// Set headers
 		$this->headers();

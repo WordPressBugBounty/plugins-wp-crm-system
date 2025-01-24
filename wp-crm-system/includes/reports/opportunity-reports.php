@@ -342,6 +342,6 @@ function wp_crm_system_process_opportunity_form() {
 			$opportunity_report .= '<tr><th><strong>Opportunity</strong></th><tr><td>' . esc_attr_x( 'No opportunities to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		print $opportunity_report;
+		print wp_kses_post( $opportunity_report );
 	}
 }

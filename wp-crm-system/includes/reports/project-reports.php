@@ -341,6 +341,6 @@ function wp_crm_system_process_project_form() {
 			$project_report .= '<tr><th><strong>Project</strong></th><tr><td>' . esc_attr_x( 'No projects to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		print $project_report;
+		print wp_kses_post( $project_report );
 	}
 }

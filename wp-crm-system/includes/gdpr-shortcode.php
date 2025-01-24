@@ -137,10 +137,10 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			if ( isset( $photo ) ): ?>
 			<tr id="contact_photo">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Photo', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Photo', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
-					<?php echo $photo; ?>
+					<?php echo wp_kses_post( $photo ); ?>
 				</td>
 			</tr>
 			<?php endif;
@@ -151,18 +151,18 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			): ?>
 			<tr id="contact_name">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Name', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Name', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php
 					if ( array_key_exists( 'prefix', $data ) && '' != $data['prefix']){
-						 echo '<span id="wpcrm_system_gdpr_table_name_prefix">' . wpcrm_system_display_name_prefix( $data['prefix'] ) . '</span> ';
+						 echo '<span id="wpcrm_system_gdpr_table_name_prefix">' . esc_attr( wpcrm_system_display_name_prefix( $data['prefix'] ) ) . '</span> ';
 					}
 					if ( array_key_exists( 'first_name', $data ) && '' != $data['first_name'] ){
-						echo '<span id="wpcrm_system_gdpr_table_first_name">' . $data['first_name'] . '</span> ';
+						echo '<span id="wpcrm_system_gdpr_table_first_name">' . esc_html( $data['first_name'] ) . '</span> ';
 					}
 					if ( array_key_exists( 'last_name', $data ) && '' != $data['last_name'] ){
-						echo '<span id="wpcrm_system_gdpr_table_last_name">' . $data['last_name'] . '</span>';
+						echo '<span id="wpcrm_system_gdpr_table_last_name">' . esc_html( $data['last_name'] ) . '</span>';
 					}
 					?>
 				</td>
@@ -172,7 +172,7 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			if ( array_key_exists( 'categories', $data ) ): ?>
 			<tr id="contact_categories">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Category', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Category', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php $count_categories = count( $data['categories'] );
@@ -181,7 +181,7 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 						if( is_object( $category ) ){
 							$comma = ( $a < $count_categories ) ? ', ' : '';
 							$cat_id = str_replace( ' ', '_', strtolower( $category->name ) ); ?>
-							<span id="wpcrm_system_gdpr_table_category_<?php echo $cat_id; ?>"><?php echo $category->name . $comma; ?></span>
+							<span id="wpcrm_system_gdpr_table_category_<?php echo esc_html( $cat_id ); ?>"><?php echo esc_html( $category->name . $comma ); ?></span>
 						<?php }
 						$a++;
 					} ?>
@@ -196,15 +196,15 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			 ): ?>
 			<tr id="contact_name">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Organization', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Organization', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php
 					if ( array_key_exists( 'organization', $data ) && '' != $data['organization'] ){
-						echo '<span id="wpcrm_system_gdpr_table_organization">' . $data['organization'] . '</span> ';
+						echo '<span id="wpcrm_system_gdpr_table_organization">' . esc_html( $data['organization'] ) . '</span> ';
 					}
 					if ( array_key_exists( 'role', $data ) && '' != $data['role'] ){
-						echo '<span id="wpcrm_system_gdpr_table_role">' . $data['role'] . '</span>';
+						echo '<span id="wpcrm_system_gdpr_table_role">' . esc_html( $data['role'] ) . '</span>';
 					}
 					?>
 				</td>
@@ -222,27 +222,27 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			): ?>
 			<tr id="contact_address">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Address', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Address', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php
 					if ( array_key_exists( 'street_1', $data ) && '' != $data['street_1'] ){
-						echo '<div id="wpcrm_system_gdpr_table_street_1">' . $data['street_1'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_street_1">' . esc_html( $data['street_1'] ) . '</div>';
 					}
 					if ( array_key_exists( 'street_2', $data ) && '' != $data['street_2'] ){
-						echo '<div id="wpcrm_system_gdpr_table_street_2">' . $data['street_2'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_street_2">' . esc_html( $data['street_2'] ) . '</div>';
 					}
 					if ( array_key_exists( 'city', $data ) && '' != $data['city'] ){
-						echo '<div id="wpcrm_system_gdpr_table_city">' . $data['city'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_city">' . esc_html( $data['city'] ) . '</div>';
 					}
 					if ( array_key_exists( 'state', $data ) && '' != $data['state'] ){
-						echo '<div id="wpcrm_system_gdpr_table_state">' . $data['state'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_state">' . esc_html( $data['state'] ) . '</div>';
 					}
 					if ( array_key_exists( 'postal_code', $data ) && '' != $data['postal_code'] ){
-						echo '<div id="wpcrm_system_gdpr_table_postal_code">' . $data['postal_code'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_postal_code">' . esc_html( $data['postal_code'] ) . '</div>';
 					}
 					if ( array_key_exists( 'country', $data ) && '' != $data['country'] ){
-						echo '<div id="wpcrm_system_gdpr_table_country">' . $data['country'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_country">' . esc_html( $data['country'] ) . '</div>';
 					}
 					?>
 				</td>
@@ -259,24 +259,24 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			): ?>
 			<tr id="contact_contact_information">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Contact Information', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Contact Information', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php
-					if ( array_key_exists( 'phone', $data ) && '' != $data['phone'] ){
-						echo '<div id="wpcrm_system_gdpr_table_phone">' . __( 'Phone: ', 'wp-crm-system' ) . $data['phone'] . '</div>';
+					if ( array_key_exists( 'phone', $data ) && '' != esc_attr( $data['phone'] ) ){
+						echo '<div id="wpcrm_system_gdpr_table_phone">' . esc_html_e( 'Phone: ', 'wp-crm-system' ) . esc_attr( $data['phone'] ) . '</div>';
 					}
-					if ( array_key_exists( 'mobile', $data ) && '' != $data['mobile'] ){
-						echo '<div id="wpcrm_system_gdpr_table_mobile">' . __( 'Mobile: ', 'wp-crm-system' ) . $data['mobile'] . '</div>';
+					if ( array_key_exists( 'mobile', $data ) && '' != esc_attr( $data['mobile'] ) ){
+						echo '<div id="wpcrm_system_gdpr_table_mobile">' . esc_html_e( 'Mobile: ', 'wp-crm-system' ) . esc_attr( $data['mobile'] ) . '</div>';
 					}
-					if ( array_key_exists( 'fax', $data ) && '' != $data['fax'] ){
-						echo '<div id="wpcrm_system_gdpr_table_fax">' . __( 'Fax: ', 'wp-crm-system' ) . $data['fax'] . '</div>';
+					if ( array_key_exists( 'fax', $data ) && '' != esc_attr( $data['fax'] ) ){
+						echo '<div id="wpcrm_system_gdpr_table_fax">' . esc_html_e( 'Fax: ', 'wp-crm-system' ) . esc_attr( $data['fax'] ) . '</div>';
 					}
-					if ( array_key_exists( 'email', $data ) && '' != $data['email'] ){
-						echo '<div id="wpcrm_system_gdpr_table_email">' . __( 'Email: ', 'wp-crm-system' ) . $data['email'] . '</div>';
+					if ( array_key_exists( 'email', $data ) && '' != esc_attr( $data['email'] ) ){
+						echo '<div id="wpcrm_system_gdpr_table_email">' . esc_html_e( 'Email: ', 'wp-crm-system' ) . esc_attr( $data['email'] ) . '</div>';
 					}
-					if ( array_key_exists( 'url', $data ) && '' != $data['url'] ){
-						echo '<div id="wpcrm_system_gdpr_table_url">' . __( 'Website: ', 'wp-crm-system' ) . $data['url'] . '</div>';
+					if ( array_key_exists( 'url', $data ) && '' != esc_attr( $data['url'] ) ){
+						echo '<div id="wpcrm_system_gdpr_table_url">' . esc_html_e( 'Website: ', 'wp-crm-system' ) . esc_attr( $data['url'] ) . '</div>';
 					}
 					?>
 				</td>
@@ -287,12 +287,12 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			if ( array_key_exists( 'information', $data ) && '' != $data['information'] ): ?>
 			<tr id="contact_additional">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Additional Information', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Additional Information', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php
 					if ( array_key_exists( 'information', $data) ){
-						echo '<div id="wpcrm_system_gdpr_table_information">' . $data['information'] . '</div>';
+						echo '<div id="wpcrm_system_gdpr_table_information">' . esc_html( $data['information'] ) . '</div>';
 					}
 					?>
 				</td>
@@ -302,16 +302,16 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			if ( array_key_exists( 'comments', $data ) && !empty( $data['comments'] ) ): ?>
 			<tr id="contact_comments">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Comments', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Comments', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php foreach ( $data['comments'] as $comment ){ ?>
-						<div class="wpcrm_system_gdpr_comment" id="wpcrm_system_gdpr_comment_<?php echo $comment->ID; ?>">
+						<div class="wpcrm_system_gdpr_comment" id="wpcrm_system_gdpr_comment_<?php echo esc_html( $comment->ID ); ?>">
 							<div class="wpcrm_system_gdpr_comment_content">
-								<?php echo $comment->comment_content; ?>
+								<?php echo esc_html( $comment->comment_content ); ?>
 							</div>
 							<div class="wpcrm_system_gdpr_comment_date">
-								<?php echo $comment->comment_date; ?>
+								<?php echo esc_html( $comment->comment_date ); ?>
 							</div>
 						</div>
 					<?php } ?>
@@ -322,17 +322,17 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			if ( $custom_fields && is_array( $custom_fields ) ):
 				foreach ( $custom_fields as $field_name => $value ){
 					$field_id = str_replace( ' ', '_', strtolower( $field_name ) ); ?>
-					<tr id="<?php echo 'wpcrm_system_gdpr_' . $field_id; ?>">
+					<tr id="<?php echo 'wpcrm_system_gdpr_' . esc_html( $field_id ); ?>">
 						<th class="wpcrm_system_gdpr_title">
-							<?php echo $field_name; ?>
+							<?php echo esc_html( $field_name ); ?>
 						</th>
 						<td class="wpcrm_system_gdpr_data">
 							<?php if ( is_array( $value ) ){
 								foreach ( $value as $v ){
-									echo '<div class="wpcrm_system_gdpr_table_' . $field_id . '">' . $v . '</div>';
+									echo '<div class="wpcrm_system_gdpr_table_' . esc_html( $field_id ) . '">' . esc_html( $v ) . '</div>';
 								}
 							} else {
-								echo '<div class="wpcrm_system_gdpr_table_' . $field_id . '">' . $value . '</div>';
+								echo '<div class="wpcrm_system_gdpr_table_' . esc_html( $field_id ) . '">' . esc_html( $value ) . '</div>';
 							} ?>
 						</td>
 					</tr>
@@ -343,12 +343,12 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			?>
 			<tr id="contact_export">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Export this data to a CSV file', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Export this data to a CSV file', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<form id="wpcrm_system_gdpr_export_contact" name="wpcrm_system_gdpr_export_contact" method="post" action="">
-						<input type="hidden" name="wpcrm_system_gdpr_export_contact_nonce" value="<?php echo wp_create_nonce( 'wpcrm-system-gdpr-export-contact-nonce' ); ?>" />
-						<input type="submit" name="wpcrm_system_gdpr_export_contact" value="<?php _e( 'Export', 'wp-crm-system-import-contacts' ); ?>" />
+						<input type="hidden" name="wpcrm_system_gdpr_export_contact_nonce" value="<?php echo esc_html( wp_create_nonce( 'wpcrm-system-gdpr-export-contact-nonce' ) ); ?>" />
+						<input type="submit" name="wpcrm_system_gdpr_export_contact" value="<?php esc_html_e( 'Export', 'wp-crm-system-import-contacts' ); ?>" />
 					</form>
 				</td>
 			</tr>
@@ -358,17 +358,17 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			?>
 			<tr id="contact_change">
 				<th class="wpcrm_system_gdpr_title">
-					<?php _e( 'Request Removal of Your Data', 'wp-crm-system' ); ?>
+					<?php esc_html_e( 'Request Removal of Your Data', 'wp-crm-system' ); ?>
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php if( !isset( $deletion ) ){ ?>
 					<form id="wpcrm_system_gdpr_remove_data" name="wpcrm_system_gdpr_remove_data" method="post" action="">
-						<input type="hidden" name="wpcrm_system_gdpr_delete_contact_nonce" value="<?php echo wp_create_nonce( 'wpcrm-system-gdpr-delete-contact-nonce' ); ?>" />
+						<input type="hidden" name="wpcrm_system_gdpr_delete_contact_nonce" value="<?php echo esc_html( wp_create_nonce( 'wpcrm-system-gdpr-delete-contact-nonce' ) ); ?>" />
 						<input type="hidden" name="wpcrm_system_gdpr_contact_id" value="<?php echo esc_attr( $id ); ?>" />
-						<input type="submit" name="wpcrm_system_gdpr_delete_contact" value="<?php _e( 'Delete My Data', 'wp-crm-system-import-contacts' ); ?>" />
+						<input type="submit" name="wpcrm_system_gdpr_delete_contact" value="<?php esc_html_e( 'Delete My Data', 'wp-crm-system-import-contacts' ); ?>" />
 					</form>
 					<?php } else {
-					_e( 'Your data has been marked for deletion. It will be removed from this site as soon as possible.', 'wp-crm-system' );
+					esc_html_e( 'Your data has been marked for deletion. It will be removed from this site as soon as possible.', 'wp-crm-system' );
 					} ?>
 				</td>
 			<?php } ?>
@@ -450,7 +450,7 @@ add_action( 'post_submitbox_misc_actions', 'wpcrm_system_gdpr_contact_marked_for
 function wpcrm_system_gdpr_contact_marked_for_deletion( $post ){
 	if( 'gdpr_deletion' == $post->post_status && 'wpcrm-contact' == $post->post_type ){ ?>
 		<div class="misc-pub-section" style="background-color:#ff0000;color:#ffffff;">
-			<?php _e( 'This contact has requested that their data be deleted. Please review this information and delete their data as soon as possible.', 'wp-crm-system' ); ?>
+			<?php esc_html_e( 'This contact has requested that their data be deleted. Please review this information and delete their data as soon as possible.', 'wp-crm-system' ); ?>
 		</div>
 	<?php }
 }

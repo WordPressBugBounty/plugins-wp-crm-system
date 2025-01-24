@@ -45,10 +45,10 @@ function wp_crm_system_export_settings_button(){
 	<div class="postbox">
 		<div class="inside">
 			<header>
-				<h3><span><?php _e( 'Export Settings', 'wp-crm-system' ); ?></span></h3>
+				<h3><span><?php esc_html_e( 'Export Settings', 'wp-crm-system' ); ?></span></h3>
 			</header>
-			<p><?php _e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-crm-system' ); ?></p>
-			<p><?php _e( 'Please note that this will include all settings. If applicable, this includes settings from add-on extension plugins including license keys, etc.', 'wp-crm-system' ); ?></p>
+			<p><?php esc_html_e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-crm-system' ); ?></p>
+			<p><?php esc_html_e( 'Please note that this will include all settings. If applicable, this includes settings from add-on extension plugins including license keys, etc.', 'wp-crm-system' ); ?></p>
 			<form method="post">
 				<p><input type="hidden" name="wp_crm_system_action" value="export_settings" /></p>
 				<p>

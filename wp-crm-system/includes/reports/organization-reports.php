@@ -222,6 +222,6 @@ function wp_crm_system_process_organization_form() {
 			$organization_report .= '<tr><th><strong>Organization</strong></th><tr><td>' . esc_attr_x( 'No organizations to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		print $organization_report;
+		print wp_kses_post( $organization_report );
 	}
 }

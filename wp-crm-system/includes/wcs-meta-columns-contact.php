@@ -64,7 +64,7 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 			/* If there is a photo, display it. */
 			} else {
 				if ( !empty( $thumbnail ) ){
-					echo $thumbnail;
+					echo wp_kses_post( $thumbnail );
 				} else {
 					echo get_avatar( $email );
 				}
@@ -79,11 +79,11 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $post ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is an organization, display it with a link to the org. */
 			else
-				echo '<a href="' . get_edit_post_link( $post ) . '">' . get_the_title( $post ) . '</a>';
+				echo '<a href="' . esc_url( get_edit_post_link( $post ) ) . '">' . esc_html( get_the_title( $post ) ) . '</a>';
 
 			break;
 		/* If displaying the 'phone' column. */
@@ -94,15 +94,15 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $number ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a phone number, display it with clickable link. */
 			} else {
 				$number = esc_html( $number );
 				if ( $display_links ) {
-					echo '<a href="tel:' . $number . '">' . $number . '</a>';
+					echo '<a href="tel:' . esc_attr( $number ) . '">' . esc_attr( $number ) . '</a>';
 				} else {
-					echo $number;
+					echo esc_attr( $number );
 				}
 			}
 			break;
@@ -114,14 +114,14 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $number ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a mobile phone number, display it with clickable link. */
 			} else {
 				if( $display_links ) {
-					echo '<a href="tel:' . $number . '">' . $number . '</a>';
+					echo '<a href="tel:' . esc_attr( $number ) . '">' . esc_attr( $number ) . '</a>';
 				} else {
-					echo $number;
+					echo esc_attr( $number );
 				}
 			}
 			break;
@@ -133,14 +133,14 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $email ) ) {
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a email, display it. */
 			} else {
 				if ( $display_links ) {
-					echo '<a href="mailto:' . $email . '">' . $email . '</a>';
+					echo '<a href="mailto:' . esc_html( $email ) . '">' . esc_html( $email ) . '</a>';
 				} else {
-					echo $email;
+					echo esc_html( $email );
 				}
 			}
 			break;
@@ -162,7 +162,7 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $address1 ) && empty( $address2 ) && empty( $city ) && empty( $state ) && empty( $postal ) )
-				echo __( 'Not Set', 'wp-crm-system' );
+				echo esc_html_e( 'Not Set', 'wp-crm-system' );
 
 			/* If there is an address field set, display it. */
 			else
@@ -283,15 +283,15 @@ function wpcrm_system_contact_filter_by_organization(){
 		if ($values) {
 		?>
 			<select name="wpcrm_system_filter_contact_by_org">
-				<option value=""><?php _e('Filter By Organization', 'wp-crm-system'); ?></option>
+				<option value=""><?php esc_html_e('Filter By Organization', 'wp-crm-system'); ?></option>
 				<?php
 				$current_v = isset($_GET['wpcrm_system_filter_contact_by_org'])? $_GET['wpcrm_system_filter_contact_by_org']:'';
 				foreach ($values as $value) {
 					printf (
 						'<option value="%s"%s>%s</option>',
-						$value,
+						esc_html( $value ),
 						$value == $current_v? ' selected="selected"':'',
-						get_the_title( $value )
+						esc_html( get_the_title( $value ) )
 					);
 				}
 				?>

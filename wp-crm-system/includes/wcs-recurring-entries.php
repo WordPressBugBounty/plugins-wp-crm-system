@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) {
 function wpcrm_system_system_recurring_tab() {
 	//Get current dashboard tab name
 	global $wpcrm_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_active_tab == 'recurring' ? 'nav-tab-active' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' ); ?>"><?php _e( 'Recurring', 'wp-crm-system' ); ?> </a>
+	<a class="nav-tab <?php echo $wpcrm_active_tab == 'recurring' ? 'nav-tab-active' : ''; ?>" href="<?php echo esc_url( admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' ) ); ?>"><?php esc_html_e( 'Recurring', 'wp-crm-system' ); ?> </a>
 <?php }
 add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_system_recurring_tab', 3 );
 
@@ -16,33 +16,33 @@ function wpcrm_system_recurring_entries(){
 
 	if ( 'recurring' == $wpcrm_active_tab && !isset( $_GET['action'] ) ) { ?>
 		<div class="wrap">
-			<h2><?php _e( 'Recurring Projects and Tasks', 'wp-crm-system' ); ?></h2>
+			<h2><?php esc_html_e( 'Recurring Projects and Tasks', 'wp-crm-system' ); ?></h2>
 
 			<p>
-				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
+				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=add_new"><?php esc_html_e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
 			</p>
 
 			<table class="wp-list-table widefat fixed posts" id="wp_crm_system_recurring_entries_table">
 				<thead>
 					<tr>
-						<th style="width: 40px;"><?php _e( 'ID', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Project/Task', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Project/Task Name', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Start Date', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'End Date', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Repeats Every', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Edit', 'wp-crm-system' ); ?></th>
+						<th style="width: 40px;"><?php esc_html_e( 'ID', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Project/Task', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Project/Task Name', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Start Date', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'End Date', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Repeats Every', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Edit', 'wp-crm-system' ); ?></th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<th style="width: 40px;"><?php _e( 'ID', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Project/Task', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Project/Task Name', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Start Date', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'End Date', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Repeats Every', 'wp-crm-system' ); ?></th>
-						<th><?php _e( 'Edit', 'wp-crm-system' ); ?></th>
+						<th style="width: 40px;"><?php esc_html_e( 'ID', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Project/Task', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Project/Task Name', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Start Date', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'End Date', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Repeats Every', 'wp-crm-system' ); ?></th>
+						<th><?php esc_html_e( 'Edit', 'wp-crm-system' ); ?></th>
 					</tr>
 				</tfoot>
 				<tbody>
@@ -95,28 +95,28 @@ function wpcrm_system_recurring_entries(){
 						}
 						?>
 						<tr>
-							<td><?php echo $entry->id; ?></td>
-							<td><?php echo $type; ?></td>
-							<td><?php echo get_the_title( $entry->project_task_id ); ?></td>
-							<td><?php echo $start_date; ?></td>
-							<td><?php echo $end_date; ?></td>
-							<td><?php echo $entry->number_per_frequency . ' ' . $frequency[$entry->frequency]; ?></td>
+							<td><?php echo esc_html( $entry->id ); ?></td>
+							<td><?php echo esc_html( $type ); ?></td>
+							<td><?php echo esc_html( get_the_title( $entry->project_task_id ) ); ?></td>
+							<td><?php echo esc_html( $start_date ); ?></td>
+							<td><?php echo esc_html( $end_date ); ?></td>
+							<td><?php echo esc_html( $entry->number_per_frequency . ' ' . $frequency[$entry->frequency] ); ?></td>
 							<td>
-								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=edit&entry_id=<?php echo $entry->id; ?>"><?php _e( 'Edit', 'wp-crm-system' ); ?></a>
-								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=delete&entry_id=<?php echo $entry->id; ?>"><?php _e( 'Delete', 'wp-crm-system' ); ?></a>
+								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=edit&entry_id=<?php echo esc_html( $entry->id ); ?>"><?php esc_html_e( 'Edit', 'wp-crm-system' ); ?></a>
+								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=delete&entry_id=<?php echo esc_html( $entry->id ); ?>"><?php esc_html_e( 'Delete', 'wp-crm-system' ); ?></a>
 							</td>
 						</tr>
 					<?php }
 				else : ?>
 					<tr>
-						<td colspan=6><?php _e( 'You have not created any recurring entries yet.', 'wp-crm-system' ); ?>
+						<td colspan=6><?php esc_html_e( 'You have not created any recurring entries yet.', 'wp-crm-system' ); ?>
 					</tr>
 				<?php endif;?>
 				</tbody>
 			</table>
 
 			<p class="submit">
-				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
+				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=add_new"><?php esc_html_e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
 			</p>
 		</div><!--end wrap-->
 	<?php }

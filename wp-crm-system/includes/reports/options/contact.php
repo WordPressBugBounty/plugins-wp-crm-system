@@ -66,7 +66,7 @@ if ( $user->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
 					}
 				};
 				$opt_out .= '>' . get_the_title( esc_attr( $wpcpost->ID ) ) . '</option>';
-				echo $opt_out;
+				echo wp_kses_post( $opt_out );
 			}
 			?>
 		</select>

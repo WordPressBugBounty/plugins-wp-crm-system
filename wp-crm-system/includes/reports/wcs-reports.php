@@ -11,37 +11,37 @@ add_action( 'wpcrm_system_report_tab', 'wpcrm_system_report_contact_tab', 6 );
 add_action( 'wpcrm_system_report_tab', 'wpcrm_system_report_campaign_tab', 7 );
 function wpcrm_system_report_overview_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'overview' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=overview"><?php _e('Overview', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'overview' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=overview"><?php esc_html_e('Overview', 'wp-crm-system') ?></a>
 <?php
 }
 function wpcrm_system_report_project_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'project' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=project"><?php _e('Project', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'project' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=project"><?php esc_html_e('Project', 'wp-crm-system') ?></a>
 <?php
 }
 function wpcrm_system_report_task_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'task' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=task"><?php _e('Task', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'task' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=task"><?php esc_html_e('Task', 'wp-crm-system') ?></a>
 <?php
 }
 function wpcrm_system_report_opportunity_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'opportunity' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=opportunity"><?php _e('Opportunity', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'opportunity' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=opportunity"><?php esc_html_e('Opportunity', 'wp-crm-system') ?></a>
 <?php
 }
 function wpcrm_system_report_organization_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'organization' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=organization"><?php _e('Organization', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'organization' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=organization"><?php esc_html_e('Organization', 'wp-crm-system') ?></a>
 <?php
 }
 function wpcrm_system_report_contact_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'contact' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=contact"><?php _e('Contact', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'contact' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=contact"><?php esc_html_e('Contact', 'wp-crm-system') ?></a>
 <?php
 }
 function wpcrm_system_report_campaign_tab() {
 	global $wpcrm_reports_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'campaign' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=campaign"><?php _e('Campaign', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $wpcrm_reports_active_tab == 'campaign' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=campaign"><?php esc_html_e('Campaign', 'wp-crm-system') ?></a>
 <?php
 }
 
@@ -58,7 +58,7 @@ function wpcrm_system_report_overview_content() {
 		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/overview-reports.php' ); ?>
 		<div class="wrap">
 			<div>
-				<h2><?php _e('WP CRM System Reports', 'wp-crm-system'); ?></h2>
+				<h2><?php esc_html_e('WP CRM System Reports', 'wp-crm-system'); ?></h2>
 				<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
 					<tbody>
 						<?php do_action( 'wpcrm_system_overview_reports' ); ?>
