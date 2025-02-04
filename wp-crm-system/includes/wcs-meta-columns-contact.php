@@ -315,3 +315,44 @@ function wpcrm_system_contacts_orgs_filter( $query ){
     }
 }
 /* End filter contacts by organization */
+
+/**
+ * Enable displaying contacts
+ * 
+ * Add another item in .subsubsub list that can be found on the
+ * top left of Contact list page beside Publish
+ */
+add_filter( 'views_edit-wpcrm-contact','wpcrm_system_contacts_show_duplicates' );
+function wpcrm_system_contacts_show_duplicates( $views ) {
+	$display_duplicates = get_option( 'wpcrm_system_contact_display_duplicates' );
+	if ( 'yes' === $display_duplicates ) {
+		global $wpdb;
+		/**
+		 * Display count dynamically
+		 *
+		 * Fetch and count all wpcrm-contact with duplicate-contact status
+		 */
+		$query   = "SELECT COUNT( * ) AS num_posts FROM {$wpdb->posts} WHERE post_status = 'duplicate-contact' AND post_type='wpcrm-contact'";
+		$results = (array) $wpdb->get_results( $query );
+		if ( ! isset( $results[0]->num_posts ) ) {
+			return $views;
+		}
+
+		/**
+		 * Set class and aria
+		 *
+		 * These 2 items are needed to display correct classes
+		 */
+		$class = '';
+		$aria  = '';
+		if( isset( $_GET['post_status'] ) ) {
+			if ( 'duplicate-contact' === sanitize_text_field( $_GET['post_status'] ) ) {
+				$class = 'class="current"';
+				$aria  = 'aria-current="page"';
+			}
+		}
+
+		$views = array_merge( $views, array( 'duplicates' => '<a href="edit.php?post_status=duplicate-contact&#038;post_type=wpcrm-contact" ' . $class . ' ' . $aria . '>Duplicates <span class="count">(' . $results[0]->num_posts . ')</span></a>' ) );
+	}
+	return $views;
+}

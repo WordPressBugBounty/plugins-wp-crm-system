@@ -53,9 +53,6 @@ function wpcrm_system_main_settings() {
 									<strong><?php esc_html_e('Duplicate Contact', 'wp-crm-system'); ?></strong>
 								</th>
 								<td>
-									<?php
-										$wpcrm_system_settings_roles = apply_filters( 'wpcrm_system_user_role_options', array() );
-									?>
 									<select name="wpcrm_system_duplicate_contact"> 
 										<?php
 										$duplicate_type = array(
@@ -74,10 +71,36 @@ function wpcrm_system_main_settings() {
 							</tr>
 							<tr>
 								<th scope="row">
-									<strong><?php esc_html_e('Access Level', 'wp-crm-system'); ?></strong>
+									<strong><?php _e('Display Duplicates in Contacts', 'wp-crm-system'); ?></strong>
+								</th>
+								<td>
+									<select name="wpcrm_system_contact_display_duplicates"> 
+										<?php
+										$contact_draft = array(
+											'no'  => __( 'No', 'wp-crm-system' ),
+											'yes' => __( 'Yes', 'wp-crm-system' ),
+										);
+										foreach ($contact_draft as $type => $label ) {
+											if ( get_option( 'wpcrm_system_contact_display_duplicates' ) == $type ) {
+												$selected = 'selected';
+											} else {
+												$selected = 'no'; 
+											}
+											?>
+											<option value="<?php echo $type; ?>" <?php echo $selected; ?> ><?php echo $label; ?></option>
+										<?php } ?>
+									</select>
+
+									<p class="description"><?php _e('By default, displaying Duplicates in Contacts are disabled. You can enable them by choosing Yes.', 'wp-crm-system'); ?></p>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">
+									<strong><?php _e('Access Level', 'wp-crm-system'); ?></strong>
 								</th>
 								<td>
 									<select name="wpcrm_system_select_user_role"> <?php
+										$wpcrm_system_settings_roles = apply_filters( 'wpcrm_system_user_role_options', array() );
 										foreach ($wpcrm_system_settings_roles as $role=>$name){
 										if (get_option('wpcrm_system_select_user_role') == $role) { $selected = 'selected'; } else { $selected = ''; } ?>
 										<option value="<?php echo esc_html( $role ); ?>" <?php echo esc_html( $selected ); ?> ><?php echo esc_html( $name ); ?></option>

@@ -1861,7 +1861,18 @@ add_action( 'admin_notices', 'wpcrm_save_contact_error_notice', 99 );
 function wpcrm_save_contact_error_notice() {
 
 	if ( isset( $_GET['contact_duplicate'] ) ) {
-		printf( '<div class="error notice"><p><strong>%s</strong></p></div>', esc_html__( 'ERROR: This contact has duplicate. Status will be forced into draft.', 'wp-crm-system' ) );
+		$duplicate_type = get_option( 'wpcrm_system_duplicate_contact' );
+		$type           = '';
+		switch( $duplicate_type ) {
+			case 'by_email':
+				$type = 'email';
+				break;
+			case 'by_name':
+			default:
+				$type = 'name';
+				break;
+		}
+		printf( '<div class="error notice"><p><strong>%s %s. %s</strong></p></div>', esc_html__( 'ERROR: This contact has duplicate', 'wp-crm-system' ), $type, esc_html__( 'Please change it or you can access duplicate contacts by enabling it on the Dashboard -> Settings -> Display Duplicates in Contacts.', 'wp-crm-system' ) );
 
 		?>
 		<style type="text/css">
@@ -1894,6 +1905,18 @@ function wpcrm_save_duplicate_contact_option() {
 		if ( in_array( esc_html( $_REQUEST['wpcrm_system_duplicate_contact'] ), $duplicate_type ) ) {
 			update_option( 'wpcrm_system_duplicate_contact', esc_html( $_REQUEST['wpcrm_system_duplicate_contact'] ) );
 		}
+	}
+}
+
+/**
+ * Save new option for displaying contact duplicate
+ *
+ * Values taken from Dashboard -> Settings -> Display Duplicates in Contacts
+ */
+add_action( 'admin_init', 'wpcrm_save_contact_display_duplicates_option' );
+function wpcrm_save_contact_display_duplicates_option() {
+	if ( isset( $_REQUEST['wpcrm_system_contact_display_duplicates'] ) ) {
+		update_option( 'wpcrm_system_contact_display_duplicates', sanitize_text_field( $_REQUEST['wpcrm_system_contact_display_duplicates'] ) );
 	}
 }
 
