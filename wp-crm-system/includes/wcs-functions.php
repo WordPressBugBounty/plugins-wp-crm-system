@@ -1147,6 +1147,16 @@ function wcs_ajax_add_post() {
 					'id'            => $post_id,
 					'organizations' => $organisation,
 				);
+
+				/**
+				 * Log this new entry if WP CRM Activity Log addon is active
+				 *
+				 * uses 'wpcrm_system_activity_log'
+				 */
+				if ( function_exists( 'wpcrm_system_activity_log' ) ) {
+					$get_user = get_userdata( get_current_user_id() );
+					wpcrm_system_activity_log( $post_id, sprintf( '%s %s <a href="%s">%s</a> %s', $get_user->user_login, __( 'added new organization', 'wp-crm-system' ), get_edit_post_link( $post_id ), get_the_title( $post_id ), __( 'through quick add modal', 'wp-crm-system' ), ), 'new' );
+				}
 			} else {
 				$response['message'] = $post_id->get_error_message();
 			}
@@ -1303,6 +1313,16 @@ function wcs_ajax_add_post() {
 						'id'      => $post_id,
 						'contact' => $contact,
 					);
+
+					/**
+					 * Log this new entry if WP CRM Activity Log addon is active
+					 *
+					 * uses 'wpcrm_system_activity_log'
+					 */
+					if ( function_exists( 'wpcrm_system_activity_log' ) ) {
+						$get_user = get_userdata( get_current_user_id() );
+						wpcrm_system_activity_log( $post_id, sprintf( '%s %s <a href="%s">%s</a> %s', $get_user->user_login, __( 'added new contact', 'wp-crm-system' ), get_edit_post_link( $post_id ), get_the_title( $post_id ), __( 'through quick add modal', 'wp-crm-system' ), ), 'new' );
+					}
 				} else {
 					$response['message'] = $post_id->get_error_message();
 				}
@@ -1404,6 +1424,16 @@ function wcs_ajax_add_post() {
 						'link'    => sprintf( '<li><span class="dashicons dashicons-clipboard wpcrm-dashicons"></span><a href="%s">%s</a></li>', get_edit_post_link( $post_id ), get_the_title( $post_id ) ),
 						'day'     => date( 'j', strtotime( $close_date ) ),
 					);
+
+					/**
+					 * Log this new entry if WP CRM Activity Log addon is active
+					 *
+					 * uses 'wpcrm_system_activity_log'
+					 */
+					if ( function_exists( 'wpcrm_system_activity_log' ) ) {
+						$get_user = get_userdata( get_current_user_id() );
+						wpcrm_system_activity_log( $post_id, sprintf( '%s %s <a href="%s">%s</a> %s', $get_user->user_login, __( 'added new project', 'wp-crm-system' ), get_edit_post_link( $post_id ), get_the_title( $post_id ), __( 'through quick add modal', 'wp-crm-system' ), ), 'new' );
+					}
 				} else {
 					$response['message'] = $post_id->get_error_message();
 				}
@@ -1534,6 +1564,16 @@ function wcs_ajax_add_post() {
 						'start_day' => date( 'j', strtotime( $start_date ) ),
 						'end_day'   => date( 'j', strtotime( $end_date ) ),
 					);
+
+					/**
+					 * Log this new entry if WP CRM Activity Log addon is active
+					 *
+					 * uses 'wpcrm_system_activity_log'
+					 */
+					if ( function_exists( 'wpcrm_system_activity_log' ) ) {
+						$get_user = get_userdata( get_current_user_id() );
+						wpcrm_system_activity_log( $post_id, sprintf( '%s %s <a href="%s">%s</a> %s', $get_user->user_login, __( 'added new campaign', 'wp-crm-system' ), get_edit_post_link( $post_id ), get_the_title( $post_id ), __( 'through quick add modal', 'wp-crm-system' ), ), 'new' );
+					}
 				} else {
 					$response['message'] = $post_id->get_error_message();
 				}
@@ -1629,6 +1669,16 @@ function wcs_ajax_add_post() {
 							'start_day' => date( 'j', strtotime( $start_date ) ),
 							'end_day'   => date( 'j', strtotime( $due_date ) ),
 						);
+
+						/**
+						 * Log this new entry if WP CRM Activity Log addon is active
+						 *
+						 * uses 'wpcrm_system_activity_log'
+						 */
+						if ( function_exists( 'wpcrm_system_activity_log' ) ) {
+							$get_user = get_userdata( get_current_user_id() );
+							wpcrm_system_activity_log( $post_id, sprintf( '%s %s <a href="%s">%s</a> %s', $get_user->user_login, __( 'added new task', 'wp-crm-system' ), get_edit_post_link( $post_id ), get_the_title( $post_id ), __( 'through quick add modal', 'wp-crm-system' ), ), 'new' );
+						}
 					} else {
 						$response['message'] = $post_id->get_error_message();
 					}
@@ -1721,6 +1771,16 @@ function wcs_ajax_add_post() {
 					'link'        => sprintf( '<li><span class="dashicons dashicons-phone wpcrm-dashicons"></span><a href="%s">%s</a></li>', get_edit_post_link( $post_id ), get_the_title( $post_id ) ),
 					'day'         => date( 'j', strtotime( $forecasted_close_date ) ),
 				);
+
+				/**
+				 * Log this new entry if WP CRM Activity Log addon is active
+				 *
+				 * uses 'wpcrm_system_activity_log'
+				 */
+				if ( function_exists( 'wpcrm_system_activity_log' ) ) {
+					$get_user = get_userdata( get_current_user_id() );
+					wpcrm_system_activity_log( $post_id, sprintf( '%s %s <a href="%s">%s</a> %s', $get_user->user_login, __( 'added new opportunity', 'wp-crm-system' ), get_edit_post_link( $post_id ), get_the_title( $post_id ), __( 'through quick add modal', 'wp-crm-system' ), ), 'new' );
+				}
 			} else {
 				$response['message'] = $post_id->get_error_message();
 			}

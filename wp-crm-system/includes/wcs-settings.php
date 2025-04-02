@@ -26,6 +26,15 @@ $wpcrm_active_subtab = isset( $_GET[ 'subtab' ] ) ? $_GET[ 'subtab' ] : '';
 <?php
 do_action( 'wpcrm_system_settings_content' );
 
+/**
+ * Provides unique action hook name
+ * 
+ * This should be the standard as we need to display different content per tab
+ * 
+ * @since 3.2.8
+ */
+do_action( 'wpcrm_system_settings_content_' . esc_html( $_GET['tab'] ) );
+
 if ( $wpcrm_active_tab == 'import' ) {
 	do_action( 'wpcrm_system_import_field' );
 }
