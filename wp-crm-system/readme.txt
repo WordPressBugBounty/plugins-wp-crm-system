@@ -3,8 +3,8 @@ Contributors: pwps, nofearinc
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 5.9
 Requires PHP: 7.4
-Tested up to: 6.7.1
-Stable tag: 3.4.2
+Tested up to: 6.8.1
+Stable tag: 3.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 3.4.3=
+* Critical fix on security issue
 = 3.4.2 =
 * New: Activity Log compatibility
 = 3.4.1 =

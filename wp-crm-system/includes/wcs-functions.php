@@ -1932,7 +1932,7 @@ function wpcrm_save_contact_error_notice() {
 				$type = 'name';
 				break;
 		}
-		printf( '<div class="error notice"><p><strong>%s %s. %s</strong></p></div>', esc_html__( 'ERROR: This contact has duplicate', 'wp-crm-system' ), $type, esc_html__( 'Please change it or you can access duplicate contacts by enabling it on the Dashboard -> Settings -> Display Duplicates in Contacts.', 'wp-crm-system' ) );
+		printf( '<div class="error notice"><p><strong>%s %s. %s</strong></p></div>', esc_html__( 'ERROR: This contact has duplicate', 'wp-crm-system' ), esc_html( $type ), esc_html__( 'Please change it or you can access duplicate contacts by enabling it on the Dashboard -> Settings -> Display Duplicates in Contacts.', 'wp-crm-system' ) );
 
 		?>
 		<style type="text/css">
@@ -1976,6 +1976,10 @@ function wpcrm_save_duplicate_contact_option() {
 add_action( 'admin_init', 'wpcrm_save_contact_display_duplicates_option' );
 function wpcrm_save_contact_display_duplicates_option() {
 	if ( isset( $_REQUEST['wpcrm_system_contact_display_duplicates'] ) ) {
+		if ( ! current_user_can( 'manage_options' ) && ! wp_verify_nonce( $_REQUEST['wpcrm-options'], 'update-options' ) ) {
+			exit;
+		}
+
 		update_option( 'wpcrm_system_contact_display_duplicates', sanitize_text_field( $_REQUEST['wpcrm_system_contact_display_duplicates'] ) );
 	}
 }

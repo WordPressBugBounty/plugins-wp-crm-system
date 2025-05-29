@@ -71,7 +71,7 @@ function wpcrm_system_main_settings() {
 							</tr>
 							<tr>
 								<th scope="row">
-									<strong><?php _e('Display Duplicates in Contacts', 'wp-crm-system'); ?></strong>
+									<strong><?php esc_html_e('Display Duplicates in Contacts', 'wp-crm-system'); ?></strong>
 								</th>
 								<td>
 									<select name="wpcrm_system_contact_display_duplicates"> 
@@ -87,16 +87,16 @@ function wpcrm_system_main_settings() {
 												$selected = 'no'; 
 											}
 											?>
-											<option value="<?php echo $type; ?>" <?php echo $selected; ?> ><?php echo $label; ?></option>
+											<option value="<?php echo esc_html( $type ); ?>" <?php echo esc_html( $selected ); ?> ><?php echo esc_html( $label ); ?></option>
 										<?php } ?>
 									</select>
 
-									<p class="description"><?php _e('By default, displaying Duplicates in Contacts are disabled. You can enable them by choosing Yes.', 'wp-crm-system'); ?></p>
+									<p class="description"><?php esc_html_e('By default, displaying Duplicates in Contacts are disabled. You can enable them by choosing Yes.', 'wp-crm-system'); ?></p>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">
-									<strong><?php _e('Access Level', 'wp-crm-system'); ?></strong>
+									<strong><?php esc_html_e('Access Level', 'wp-crm-system'); ?></strong>
 								</th>
 								<td>
 									<select name="wpcrm_system_select_user_role"> <?php
