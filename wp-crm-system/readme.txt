@@ -1,40 +1,40 @@
-=== WordPress CRM Plugin - WP-CRM System ===
+=== WP-CRM System – Manage Clients and Projects ===
 Contributors: pwps, nofearinc
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 5.9
 Requires PHP: 7.4
 Tested up to: 6.8.1
-Stable tag: 3.4.3
+Stable tag: 3.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP-CRM System is a WordPress CRM that is designed to work exclusively with YOUR WordPress site.
+WP-CRM System – Manage Clients and Projects is a WordPress CRM that is designed to work exclusively with YOUR WordPress site.
 
 == Description ==
-WP-CRM System is a fully featured WordPress CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
+WP-CRM System – Manage Clients and Projects is a fully featured WordPress CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
 
-Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the WordPress CRM data they need to drive business.
+Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System – Manage Clients and Projects allows you to have an unlimited number of records and lets you give everyone in your organization access to the WordPress CRM data they need to drive business.
 
 **More than a CRM**
 
-WP-CRM System allows your team to manage projects, assign individual tasks, track marketing campaigns, and helps convert your opportunities into successes!
+WP-CRM System – Manage Clients and Projects allows your team to manage projects, assign individual tasks, track marketing campaigns, and helps convert your opportunities into successes!
 
 Easily import contacts and other records from your old CRM with our easy to use CSV uploader.
 
 Get email updates whenever a project or task you are assigned to is created or edited. Never miss a thing!
 
-Quickly create new contacts from existing users on your site with just one click. The plugin will take existing information (name, email address, etc.) from the user's account and add it to the new contact in WP-CRM System.
+Quickly create new contacts from existing users on your site with just one click. The plugin will take existing information (name, email address, etc.) from the user's account and add it to the new contact in WP-CRM System – Manage Clients and Projects.
 
 **Assists with GDPR compliance**
-WP-CRM System has optional features, which can assist with GDPR compliance if that is something your business requires. Please note that this plugin does not guarantee GDPR compliance as no plugin can provide 100% compliance. Compliance requires actions on the part of your business that this plugin cannot provide.
+WP-CRM System – Manage Clients and Projects has optional features, which can assist with GDPR compliance if that is something your business requires. Please note that this plugin does not guarantee GDPR compliance as no plugin can provide 100% compliance. Compliance requires actions on the part of your business that this plugin cannot provide.
 
-Available features include a way for your contacts to view the data that is stored on them in WP-CRM System, the ability for your contacts to export that data, and the ability for contacts to request that their data be deleted.
+Available features include a way for your contacts to view the data that is stored on them in WP-CRM System – Manage Clients and Projects, the ability for your contacts to export that data, and the ability for contacts to request that their data be deleted.
 
 Not sure what GDPR is or if it applies to your business? [Read our blog post on GDPR](https://www.wp-crm.com/will-your-crm-be-gdpr-compliant/).
 
 **Premium Extensions Available**
 
-There are a number of inexpensive WordPress CRM extensions that will allow you to do more with WP-CRM System.
+There are a number of inexpensive WordPress CRM extensions that will allow you to do more with WP-CRM System – Manage Clients and Projects.
 
 * [Zapier](https://www.wp-crm.com/downloads/zapier-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=zapier&utm_campaign=readme) - Connect WP-CRM System to over 750 different apps with Zapier. Send WP-CRM System to other apps, or create/update records in WP-CRM System from data in other apps.
 * [WooCommerce](https://www.wp-crm.com/downloads/woocommerce-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=woocommerce&utm_campaign=readme) - View contact's order history from their record, automatically create new WP-CRM System contacts and organizations on new orders.
@@ -53,17 +53,17 @@ There are a number of inexpensive WordPress CRM extensions that will allow you t
 
 **Have a suggestion for a new feature?**
 
-We're always looking to add new features to WP-CRM System. If you have a third party app you would like to integrate with, or a new feature we should include [we want to hear about it](https://www.wp-crm.com/support/)!
+We're always looking to add new features to WP-CRM System – Manage Clients and Projects. If you have a third party app you would like to integrate with, or a new feature we should include [we want to hear about it](https://www.wp-crm.com/support/)!
 
 **Need Help?**
 
-Documentation for WP-CRM System and extensions can be [found on our website](https://www.wp-crm.com/docs/).
+Documentation for WP-CRM System – Manage Clients and Projects and extensions can be [found on our website](https://www.wp-crm.com/docs/).
 
 Get support from the WordPress [support page](http://wordpress.org/support/plugin/wp-crm-system) for this plugin, or [contact support](https://www.wp-crm.com/support/).
 
 **Languages**
 
-WP-CRM System is written in American English, and has been translated into the following languages:
+WP-CRM System – Manage Clients and Projects is written in American English, and has been translated into the following languages:
 
 * Russian - WP-CRM System Core Plugin by Maxim Glazunov
 * Polish - WP-CRM System Core Plugin by Pawel Michalski
@@ -75,8 +75,8 @@ If you would like to submit a translation, please submit it [through our website
 2. Activate the plugin through the Plugins menu in WordPress.
 
 == Frequently Asked Questions ==
-= What makes WP-CRM System different from other CRM's? =
-Many other CRM's are hosted on the CRM company's servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your WordPress CRM website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
+= What makes WP-CRM System – Manage Clients and Projects different from other CRM's? =
+Many other CRM's are hosted on the CRM company's servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System – Manage Clients and Projects gives you control over your data by keeping it all contained on your WordPress CRM website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
 
 = Can I Share Information With Customers? =
 Sure! We have a [Client Area](https://www.wp-crm.com/downloads/client-area/?utm_source=extensions&utm_medium=description_tab&utm_content=client-area&utm_campaign=readme) add-on, which lets you assign projects, tasks, campaigns, and even invoices (with our [Invoicing](https://www.wp-crm.com/downloads/invoicing/?utm_source=extensions&utm_medium=description_tab&utm_content=invoicing&utm_campaign=readme) add-on) to your contacts. When your contact logs into their account, they'll be able to see everything you're working on for them.
@@ -90,7 +90,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
-= 3.4.3=
+= 3.4.4 =
+* Replacing trademark safe name
+= 3.4.3 =
 * Critical fix on security issue
 = 3.4.2 =
 * New: Activity Log compatibility

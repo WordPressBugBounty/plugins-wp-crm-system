@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: WP-CRM System
+Plugin Name: WP-CRM System – Manage Clients and Projects
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 3.4.3
+Version: 3.4.4
 Author: Premium WordPress Support
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
